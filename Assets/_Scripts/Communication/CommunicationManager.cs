@@ -10,11 +10,12 @@ public class CommunicationManager : MonoBehaviour
 
     public PlayerType player;
     public float waitSeconds = 1f;
+    public string stateServerAddress = "localhost:8080";
     public Choice moveObjectForTest; // TODO Remove
     private Coroutine _startCoroutine;
     public static CommunicationManager Instance;
     private bool coroutineIsRunning = false;
-    
+
     private void Awake()
     {
         Instance = this;
@@ -73,7 +74,7 @@ public class CommunicationManager : MonoBehaviour
 
     private UnityWebRequest prepareRequest(Choice choice)
     {
-        var request = new UnityWebRequest("http://localhost:8080/updateState/" + player + "/" + choice.Round, "POST");
+        var request = new UnityWebRequest("http://" + stateServerAddress + "/updateState/" + player + "/" + choice.Round, "POST");
         request.uploadHandler = new UploadHandlerRaw(Encoding.UTF8.GetBytes(JsonUtility.ToJson(choice)));
         request.downloadHandler = new DownloadHandlerBuffer();
         request.SetRequestHeader("Content-Type", "application/json");
