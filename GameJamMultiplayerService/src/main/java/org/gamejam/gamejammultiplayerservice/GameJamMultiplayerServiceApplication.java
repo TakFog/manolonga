@@ -12,11 +12,6 @@ import java.util.concurrent.ConcurrentHashMap;
 public class GameJamMultiplayerServiceApplication {
     private final Map<Integer, Map<String, String>> stateByPlayer = new ConcurrentHashMap<>();
 
-    @GetMapping("/ping")
-    String ping() {
-        return "pong";
-    }
-
     @PostMapping("/updateState/{playerId}/{roundId}")
     Map<String, String> updateState(@PathVariable String playerId, @PathVariable final int roundId, @RequestBody String statePayload) {
         Map<String, String> stringStringMap = stateByPlayer.computeIfAbsent(roundId, k -> new ConcurrentHashMap<>());
