@@ -80,7 +80,8 @@ public class CommunicationManager : MonoBehaviour
 
     private UnityWebRequest prepareRequest(Choice choice, PlayerType player, int round)
     {
-        var request = new UnityWebRequest("http://localhost:8080/updateState/" + player + "/" + round, "POST");
+        var request =
+            new UnityWebRequest("http://" + Globals.ServerAddress + "/updateState/" + player + "/" + round, "POST");
         request.uploadHandler = new UploadHandlerRaw(Encoding.UTF8.GetBytes(JsonUtility.ToJson(choice)));
         request.downloadHandler = new DownloadHandlerBuffer();
         request.SetRequestHeader("Content-Type", "application/json");
