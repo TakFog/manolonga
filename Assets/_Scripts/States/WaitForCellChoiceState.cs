@@ -23,7 +23,13 @@ public class WaitForCellChoiceState : State
     public override void Enter()
     {
         base.Enter();
+        CellClickManager.Instance.OnCellClicked += RegisterClick;
         StateManager.Instance.StartCoroutine(C_WaitForCellChoice(choice, allowedDistance, entityPosition));
+    }
+    void RegisterClick(Vector3Int cellPosition)
+    {
+        if(waitingInput)
+            clickedCell = cellPosition;
     }
     IEnumerator C_WaitForCellChoice(Choice choice, int allowedDistance, Vector3 entityPosition)
     {
@@ -43,5 +49,6 @@ public class WaitForCellChoiceState : State
     public override void Exit()
     {
         base.Exit();
+        CellClickManager.Instance.OnCellClicked -= RegisterClick;
     }
 }

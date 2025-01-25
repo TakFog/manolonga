@@ -22,7 +22,7 @@ public class WaitForExecutionState : State
         Monster monster = Globals.Monster;
         child.StartCoroutine(child.C_ExecuteChoice(communicationsOfThisRound.ChildChoice));
         monster.StartCoroutine(monster.C_ExecuteChoice(communicationsOfThisRound.MonsterChoice));
-        yield return new WaitUntil()
+        yield return new WaitWhile(()=> child.IsExecuting || monster.IsExecuting);
         StateManager.Instance.NextRound();
         StateManager.Instance.ChangeState(new WaitForActionChoiceState());
     }

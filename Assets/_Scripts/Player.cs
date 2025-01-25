@@ -1,16 +1,20 @@
 ﻿using System;
+using IngameDebugConsole;
 using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    private PlayerType playerType;
+    PlayerType playerType;
     Child child;
     Monster monster;
 
-    private void Awake()
+    private void Start()
     {
-        child = GetComponent<Child>();
-        monster = GetComponent<Monster>();
+        playerType = Globals.PlayerType;
+        child = Globals.Child;
+        monster = Globals.Monster;
+        
+        DebugLogConsole.AddCommandInstance("ca", "Choose action", "ChooseAction", this);
     }
 
     public void ChooseAction(EntityActionType actionType)
