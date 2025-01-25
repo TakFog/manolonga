@@ -1,10 +1,16 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using System.Linq;
+using UnityEngine;
 using UnityEngine.Serialization;
 
 [System.Serializable]
 public class Choice
 {
-    [FormerlySerializedAs("actionType")] public EntityAction ActionType;
-    [FormerlySerializedAs("endCell")] public Vector3Int EndCell;
-    [FormerlySerializedAs("round")] public int Round;
+    public EntityActionType actionType;
+    public Vector3[] positionsPath;
+    public List<Vector3> PositionsPath
+    {
+        get => positionsPath?.ToList();
+        set => positionsPath = value?.ToArray();
+    }
 }

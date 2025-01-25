@@ -35,8 +35,8 @@ public class TilemapManager : MonoBehaviour
     }
     public bool IsCellWalkable(Vector3Int cellPosition)
     {
-        //TBD
-        return true;
+        return tilemap.HasTile(cellPosition);
+        //TODO: Add support for non walkable tile
     }
 
     public List<CellPath> GetCellPaths(Vector3Int cellPosition, int distance)

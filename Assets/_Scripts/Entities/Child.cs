@@ -1,71 +1,49 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
+using DG.Tweening;
 using UnityEngine;
 
 public class Child : Entity
 {
-    [SerializeField, Range(1, 10)] private int walkDistance;
-    [SerializeField, Range(1, 10)] private int runDistance;
+    [Range(1, 5)] public int WalkDistance;
+    [Range(1, 5)] public int RunDistance;
 
-    private void OnEnable()
+    private void Awake()
     {
-        throw new NotImplementedException();
-    }
-    private void OnDisable()
-    {
-        throw new NotImplementedException();
+        Globals.Child = this;
     }
 
-    public void ChooseAction(EntityAction action)
+    public override IEnumerator C_ExecuteChoice(Choice choice)
     {
-        if (StateManager.Instance.CurrentState.GetType() != typeof(WaitForActionChoiceState))
-            return;
-        
-        Choice choice = new Choice();
-        choice.ActionType = action;
-
-        switch (action)
+        IsExecuting = true;
+        switch (choice.actionType)
         {
-            case EntityAction.Walk:
-                StateManager.Instance.ChangeState(new WaitForCellChoiceState(choice, walkDistance, transform.position));
+            case EntityActionType.Walk:
+                yield return StartCoroutine(C_Walk(choice.PositionsPath));
                 break;
-            case EntityAction.Run:
-                StateManager.Instance.ChangeState(new WaitForCellChoiceState(choice, runDistance, transform.position));
+            case EntityActionType.Run:
+                yield return StartCoroutine(C_Run(choice.PositionsPath));
                 break;
-            case EntityAction.CheckWind:
-                StateManager.Instance.ChangeState(new SendChoiceState(choice));
+            case EntityActionType.CheckWind:
                 break;
         }
+        IsExecuting = false;
     }
-    public void MovesReceived(CommunicationData communications)
+    
+    public IEnumerator C_Walk(List<Vector3> positionsPath)
     {
-        ExecuteChoice(communications.Child);
-    }
-    public void ExecuteChoice(Choice choice)
-    {
-        switch (choice.ActionType)
+        for (int i = 0; i < positionsPath.Count; i++)
         {
-            case EntityAction.Walk:
-                ExecuteWalk(choice.EndCell);
-                break;
-            case EntityAction.Run:
-                ExecuteRun(choice.EndCell);
-                break;
-            case EntityAction.CheckWind:
-                ExecuteCheckWind();
-                break;
+            yield return transform.DOMove(positionsPath[i], MovementAnimationDuration/positionsPath.Count).SetEase(MovementAnimationEase).WaitForCompletion();
         }
     }
-    public void ExecuteWalk(Vector3Int tilePosition)
+    public IEnumerator C_Run(List<Vector3> positionsPath)
     {
-        
+        for (int i = 0; i < positionsPath.Count; i++)
+        {
+            yield return transform.DOMove(positionsPath[i], MovementAnimationDuration/positionsPath.Count).SetEase(MovementAnimationEase).WaitForCompletion();
+        }
     }
-    public void ExecuteRun(Vector3Int tilePosition)
-    {
-        
-    }
-    public void ExecuteCheckWind()
-    {
-        
-    }
+    
 }
