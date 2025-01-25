@@ -20,11 +20,10 @@ public class WaitForExecutionState : State
     {
         Child child = Globals.Child;
         Monster monster = Globals.Monster;
-        child.StartCoroutine(child.C_ExecuteChoice(communicationsOfThisRound.ChildChoice));
-        monster.StartCoroutine(monster.C_ExecuteChoice(communicationsOfThisRound.MonsterChoice));
-        yield return new WaitUntil()
-        StateManager.Instance.NextRound();
-        StateManager.Instance.ChangeState(new WaitForActionChoiceState());
+        child.StartCoroutine(child.C_ExecuteChoice(communicationsOfThisRound.Child));
+        monster.StartCoroutine(monster.C_ExecuteChoice(communicationsOfThisRound.Monster));
+        yield return new WaitWhile(()=> child.IsExecuting || monster.IsExecuting);
+        StateManager.Instance.ChangeState(new WaitForEndingRoundState());
     }
     
     public override void Exit()

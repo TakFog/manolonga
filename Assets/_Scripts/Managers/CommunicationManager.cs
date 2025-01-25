@@ -1,6 +1,5 @@
 using System;
 using System.Collections;
-using System.Collections.Generic;
 using System.Text;
 using UnityEngine;
 using UnityEngine.Networking;
@@ -9,47 +8,64 @@ public class CommunicationManager : MonoBehaviour
 {
     public event Action<CommunicationData> OnMovesReceived;
 
-    public PlayerType player;
     public float waitSeconds = 1f;
-    public Choice moveObjectForTest; // TODO Remove
     private Coroutine _startCoroutine;
     public static CommunicationManager Instance;
-    private bool coroutineIsRunning = false;
-
+    private bool hasChildSentRequest;
+    private bool hasMonsterSentRequest;
+    
     private void Awake()
     {
         Instance = this;
     }
 
-    public void MoveInsert(Choice move)
+    private void OnEnable()
     {
-        if (_startCoroutine == null || !coroutineIsRunning)
+        
+    }
+
+    public void ResetRequests()
+    {
+        hasChildSentRequest = false;
+        hasMonsterSentRequest = false;
+    }
+    public IEnumerator C_ClearServer()
+    {
+        var request =
+            new UnityWebRequest("http://" + Globals.ServerAddress + "/clear", "GET");
+        
+        // Wait for the request to complete
+        yield return request.SendWebRequest();
+
+        if (request.result == UnityWebRequest.Result.Success)
         {
-            _startCoroutine = StartCoroutine(Request(move));
+            Debug.Log("Successfully cleared");
         }
     }
 
-    public void MoveTest()
+    public void SubmitChoice(Choice move, PlayerType player, int round)
     {
-        if (moveObjectForTest != null)
-        {
-            MoveInsert(moveObjectForTest);
-        }
+        if (player == PlayerType.Child && !hasChildSentRequest)
+            hasChildSentRequest = true;
+        else if (player == PlayerType.Monster && !hasMonsterSentRequest)
+            hasMonsterSentRequest = true;
+        else
+            return;
+        _startCoroutine = StartCoroutine(C_Request(move, player, round));
     }
 
-    IEnumerator Request(Choice choice)
+    IEnumerator C_Request(Choice choice, PlayerType player, int round)
     {
-        coroutineIsRunning = true;
         // Create a new instance of the WebRequest class
         while (true)
         {
-            var request = prepareRequest(choice);
+            var request = prepareRequest(choice, player, round);
             // Wait for the request to complete
             yield return request.SendWebRequest();
 
             if (request.result == UnityWebRequest.Result.Success)
             {
-                var movesOfThisRound = handleSuccess(request);
+                var movesOfThisRound = handleSuccess(request, round);
                 if (movesOfThisRound.hasMonster && movesOfThisRound.hasChild)
                 {
                     // Send event
@@ -68,56 +84,28 @@ public class CommunicationManager : MonoBehaviour
                 yield return new WaitForSeconds(waitSeconds);
             }
         }
-
-        coroutineIsRunning = false;
     }
 
-    private UnityWebRequest prepareRequest(Choice choice)
+    private UnityWebRequest prepareRequest(Choice choice, PlayerType player, int round)
     {
         var request =
-            new UnityWebRequest("http://" + Globals.ServerAddress + "/updateState/" + player + "/" + choice.Round, "POST");
+            new UnityWebRequest("http://" + Globals.ServerAddress + "/updateState/" + player + "/" + round, "POST");
         request.uploadHandler = new UploadHandlerRaw(Encoding.UTF8.GetBytes(JsonUtility.ToJson(choice)));
         request.downloadHandler = new DownloadHandlerBuffer();
         request.SetRequestHeader("Content-Type", "application/json");
         return request;
     }
 
-    private static CommunicationData handleSuccess(UnityWebRequest request)
+    private static CommunicationData handleSuccess(UnityWebRequest request, int round)
     {
         CommunicationData communicationsOfThisRound;
         var downloadHandlerText = request.downloadHandler.text;
         communicationsOfThisRound =
             JsonUtility.FromJson<CommunicationData>(downloadHandlerText);
         Debug.Log("Response: " + downloadHandlerText);
-        Debug.Log("Monster: " + communicationsOfThisRound.MonsterChoice?.Round + "/" +
-                  communicationsOfThisRound.MonsterChoice?.actionType + "/" +
-                  communicationsOfThisRound.MonsterChoice?.PositionsPath + "/" + communicationsOfThisRound.hasChild +
-                  "/" + communicationsOfThisRound.hasMonster);
-        Debug.Log("Child: " + communicationsOfThisRound.ChildChoice?.Round + "/" +
-                  communicationsOfThisRound.ChildChoice?.actionType + "/" +
-                  communicationsOfThisRound.ChildChoice?.PositionsPath + "/" + communicationsOfThisRound.hasChild +
-                  "/" + communicationsOfThisRound.hasMonster);
+        Debug.Log("Monster: " + round + "/" + communicationsOfThisRound.Monster?.actionType + "/" + communicationsOfThisRound.Monster?.PositionsPath + "/" + communicationsOfThisRound.hasChild + "/" + communicationsOfThisRound.hasMonster);
+        Debug.Log("Child: " + round + "/" + communicationsOfThisRound.Child?.actionType + "/" + communicationsOfThisRound.Child?.PositionsPath + "/" + communicationsOfThisRound.hasChild + "/" + communicationsOfThisRound.hasMonster);
 
         return communicationsOfThisRound;
-    }
-
-    [ContextMenu("Send Test Move")]
-    public void ContextMenu()
-    {
-        var choice = new Choice()
-        {
-            actionType = EntityActionType.Attack,
-            PositionsPath = new List<Vector3>()
-            {
-                new()
-                {
-                    x = 1,
-                    y = 1,
-                    z = 1,
-                }
-            },
-            Round = 1
-        };
-        MoveInsert(choice);
     }
 }
