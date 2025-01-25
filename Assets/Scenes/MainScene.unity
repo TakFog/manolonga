@@ -304,8 +304,9 @@ GameObject:
   - component: {fileID: 279179825}
   - component: {fileID: 279179824}
   - component: {fileID: 279179823}
+  - component: {fileID: 279179826}
   m_Layer: 5
-  m_Name: InputField (TMP)
+  m_Name: ChangeServerInputField
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -328,7 +329,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -19, y: -487}
+  m_AnchoredPosition: {x: 609, y: -623}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &279179823
@@ -470,6 +471,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 279179821}
   m_CullTransparentMesh: 1
+--- !u!114 &279179826
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 279179821}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5571dcbe6d76e47d1bcf21ef32a5b713, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  serverAddressInputField: {fileID: 279179823}
 --- !u!1 &1030863174
 GameObject:
   m_ObjectHideFlags: 0
@@ -610,8 +624,8 @@ Camera:
   m_GameObject: {fileID: 1196389175}
   m_Enabled: 1
   serializedVersion: 2
-  m_ClearFlags: 1
-  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
+  m_ClearFlags: 2
+  m_BackGroundColor: {r: 0, g: 0, b: 0, a: 0}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0
