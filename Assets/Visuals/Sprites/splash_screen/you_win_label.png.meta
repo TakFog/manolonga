@@ -1,13 +1,25 @@
 fileFormatVersion: 2
-guid: eb5cb399525e0b94e87d28efc7c259d9
+guid: a514b8c25ec7a924eb1434a14de712d4
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -2429146818564373850
-    second: walk_animation-Sheet_0
+      213: -9140222886614610361
+    second: you_win_label_0
   - first:
-      213: -6151840839882605722
-    second: walk_animation-Sheet_1
+      213: -7883156831099193812
+    second: you_win_label_1
+  - first:
+      213: 4441288143381666865
+    second: you_win_label_2
+  - first:
+      213: -4705716229912389017
+    second: you_win_label_3
+  - first:
+      213: 308218540068112324
+    second: you_win_label_4
+  - first:
+      213: 5895219135749758873
+    second: you_win_label_5
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -40,7 +52,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 0
+    filterMode: 1
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -51,10 +63,10 @@ TextureImporter:
   compressionQuality: 50
   spriteMode: 2
   spriteExtrude: 1
-  spriteMeshType: 0
+  spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 32
+  spritePixelsToUnits: 100
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -103,13 +115,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: walk_animation-Sheet_0
+      name: you_win_label_0
       rect:
         serializedVersion: 2
-        x: 2
+        x: 9
         y: 0
-        width: 42
-        height: 56
+        width: 21
+        height: 22
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -118,20 +130,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 6a24334b6dfe94ed0800000000000000
-      internalID: -2429146818564373850
+      spriteID: 74ec07b26b7672180800000000000000
+      internalID: -9140222886614610361
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: walk_animation-Sheet_1
+      name: you_win_label_1
       rect:
         serializedVersion: 2
-        x: 50
+        x: 34
         y: 0
-        width: 44
-        height: 55
+        width: 24
+        height: 22
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -140,8 +152,96 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 66b7e08995540aaa0800000000000000
-      internalID: -6151840839882605722
+      spriteID: c2673adf0a6699290800000000000000
+      internalID: -7883156831099193812
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: you_win_label_2
+      rect:
+        serializedVersion: 2
+        x: 61
+        y: 0
+        width: 24
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 13c1b631900a2ad30800000000000000
+      internalID: 4441288143381666865
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: you_win_label_3
+      rect:
+        serializedVersion: 2
+        x: 114
+        y: 0
+        width: 24
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 76a18465500f1beb0800000000000000
+      internalID: -4705716229912389017
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: you_win_label_4
+      rect:
+        serializedVersion: 2
+        x: 141
+        y: 0
+        width: 21
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4c703f11123074400800000000000000
+      internalID: 308218540068112324
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: you_win_label_5
+      rect:
+        serializedVersion: 2
+        x: 167
+        y: 0
+        width: 24
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 99f137bd19600d150800000000000000
+      internalID: 5895219135749758873
       vertices: []
       indices: 
       edges: []
@@ -159,9 +259,7 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable:
-      walk_animation-Sheet_0: -2429146818564373850
-      walk_animation-Sheet_1: -6151840839882605722
+    nameFileIdTable: {}
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
