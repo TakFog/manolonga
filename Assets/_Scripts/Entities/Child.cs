@@ -1,71 +1,47 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
+using Microsoft.Win32.SafeHandles;
 using UnityEngine;
 
 public class Child : Entity
 {
-    [SerializeField, Range(1, 10)] private int walkDistance;
-    [SerializeField, Range(1, 10)] private int runDistance;
+    [Range(1, 5)] public int WalkDistance;
+    [Range(1, 5)] public int RunDistance;
 
-    private void OnEnable()
+    private void Awake()
+    {
+        Globals.Child = this;
+    }
+
+    public override IEnumerator C_ExecuteChoice(Choice choice)
+    {
+        IsExecuting = true;
+        switch (choice.actionType)
+        {
+            case EntityActionType.Walk:
+                yield return StartCoroutine(C_Walk(choice.PositionsPath));
+                break;
+            case EntityActionType.Run:
+                yield return StartCoroutine(C_Run(choice.PositionsPath));
+                break;
+            case EntityActionType.CheckWind:
+                break;
+        }
+        IsExecuting = false;
+    }
+    
+    public IEnumerator C_Walk(List<Vector3> positionsPath)
+    {
+        throw new NotImplementedException();
+        foreach (var cell in positionsPath)
+        {
+            
+        }
+    }
+    public IEnumerator C_Run(List<Vector3> positionsPath)
     {
         throw new NotImplementedException();
     }
-    private void OnDisable()
-    {
-        throw new NotImplementedException();
-    }
-
-    public void ChooseAction(EntityAction action)
-    {
-        if (StateManager.Instance.CurrentState.GetType() != typeof(WaitForActionChoiceState))
-            return;
-        
-        Choice choice = new Choice();
-        choice.ActionType = action;
-
-        switch (action)
-        {
-            case EntityAction.Walk:
-                StateManager.Instance.ChangeState(new WaitForCellChoiceState(choice, walkDistance, transform.position));
-                break;
-            case EntityAction.Run:
-                StateManager.Instance.ChangeState(new WaitForCellChoiceState(choice, runDistance, transform.position));
-                break;
-            case EntityAction.CheckWind:
-                StateManager.Instance.ChangeState(new SendChoiceState(choice));
-                break;
-        }
-    }
-    public void MovesReceived(CommunicationData communications)
-    {
-        ExecuteChoice(communications.Child);
-    }
-    public void ExecuteChoice(Choice choice)
-    {
-        switch (choice.ActionType)
-        {
-            case EntityAction.Walk:
-                ExecuteWalk(choice.EndCell);
-                break;
-            case EntityAction.Run:
-                ExecuteRun(choice.EndCell);
-                break;
-            case EntityAction.CheckWind:
-                ExecuteCheckWind();
-                break;
-        }
-    }
-    public void ExecuteWalk(Vector3Int tilePosition)
-    {
-        
-    }
-    public void ExecuteRun(Vector3Int tilePosition)
-    {
-        
-    }
-    public void ExecuteCheckWind()
-    {
-        
-    }
+    
 }

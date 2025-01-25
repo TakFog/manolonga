@@ -3,14 +3,15 @@
     public override void Enter()
     {
         base.Enter();
-        //Subscribe to moves received event
+        CommunicationManager.Instance.OnMovesReceived += MovesReceived;
     }
-    void MovesReceived()
+    void MovesReceived(CommunicationData communicationOfThisRound)
     {
-        StateManager.Instance.ChangeState(new WaitForExecutionState());
+        StateManager.Instance.ChangeState(new WaitForExecutionState(communicationOfThisRound));
     }
     public override void Exit()
     {
         base.Exit();
+        CommunicationManager.Instance.OnMovesReceived -= MovesReceived;
     }
 }

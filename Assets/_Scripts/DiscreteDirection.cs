@@ -30,6 +30,24 @@ public class DiscreteDirection
         new Vector2(1 / Mathf.Sqrt(2), -1 / Mathf.Sqrt(2))    // Bottom-right
     };
 
+    public static Cardinal ToCardinal(Vector2 dir)
+    {
+        if (IsTop(dir))
+        {
+            if (IsLeft(dir)) return Cardinal.NorthWest;
+            if (IsRight(dir)) return Cardinal.NorthEast;
+            return Cardinal.North;
+        } 
+        if (IsBottom(dir))
+        {
+            if (IsLeft(dir)) return Cardinal.SouthWest;
+            if (IsRight(dir)) return Cardinal.SouthEast;
+            return Cardinal.South;
+        }
+        if (IsLeft(dir)) return Cardinal.West;
+        return Cardinal.East;
+    }
+
     public static bool IsTop(Vector2 direction)
     {
         return direction.y > 0;

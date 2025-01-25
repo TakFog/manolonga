@@ -1,11 +1,17 @@
 ﻿using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
+using UnityEngine.Tilemaps;
 
 public class WaitForCellChoiceState : State
 {
     private Choice choice;
     private int allowedDistance;
     private Vector3 entityPosition;
+
+    private bool waitingInput = false;
+    private Vector3Int? clickedCell = null;
 
     public WaitForCellChoiceState(Choice choice, int allowedDistance, Vector3 entityPosition)
     {
@@ -21,9 +27,18 @@ public class WaitForCellChoiceState : State
     }
     IEnumerator C_WaitForCellChoice(Choice choice, int allowedDistance, Vector3 entityPosition)
     {
-        //TILEMAPMANAGER convert position and get allowed cells
+        Vector3Int entityCellPosition = TilemapManager.Instance.GetCellAtWorldPosition(entityPosition);
+        List<CellPath> cellPaths = TilemapManager.Instance.GetCellPaths(entityCellPosition, allowedDistance);
+        List<Vector3Int> walkableCells = cellPaths.Select(x => x.cell).ToList();
+        HighlightManager.Instance.HighlightCells(walkableCells);
+        
+        waitingInput = true;
+        yield return new WaitUntil(() => clickedCell.HasValue && walkableCells.Contains(clickedCell.Value));
+        waitingInput = false;
+        clickedCell = null;
+        HighlightManager.Instance.UnhighlightCells(walkableCells);
+        choice.PositionsPath = cellPaths[walkableCells.IndexOf(clickedCell.Value)].worldPath;
         StateManager.Instance.ChangeState(new SendChoiceState(choice));
-        throw new System.NotImplementedException();
     }
     public override void Exit()
     {
