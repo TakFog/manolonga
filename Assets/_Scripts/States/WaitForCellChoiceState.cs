@@ -21,7 +21,7 @@ public class WaitForCellChoiceState : State
     }
     IEnumerator C_WaitForCellChoice(Choice choice, int allowedDistance, Vector3 entityPosition)
     {
-        //TILEMAPMANAGER convert position and get allowed cells
+        TilemapManager.Instance.
         StateManager.Instance.ChangeState(new SendChoiceState(choice));
         throw new System.NotImplementedException();
     }

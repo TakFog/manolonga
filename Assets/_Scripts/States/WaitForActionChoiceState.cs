@@ -4,6 +4,7 @@
     {
         base.Enter();
     }
+
     public override void Exit()
     {
         base.Exit();
