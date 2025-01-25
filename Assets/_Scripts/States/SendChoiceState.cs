@@ -8,7 +8,7 @@
     public override void Enter()
     {
         base.Enter();
-        //SENDREQUEST(choice)
+        CommunicationManager.Instance.MoveInsert(choice);
         StateManager.Instance.ChangeState(new WaitForOpponentChoiceReceivedState());
     }
     public override void Exit()

@@ -6,7 +6,6 @@ public class StateManager : MonoBehaviour
     public static StateManager Instance { get; private set; }
     public event Action OnRoundCompleted;    
     public State CurrentState { get; private set; }
-    
     public int Round { get; private set; } = 0;
 
     private void Awake()
