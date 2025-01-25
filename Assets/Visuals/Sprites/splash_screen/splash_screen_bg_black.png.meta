@@ -134,7 +134,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      splash_screen_bg_black_0: -6272455367139684273
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

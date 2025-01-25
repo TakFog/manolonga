@@ -134,7 +134,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Splash_screen_Boy_win_0: -4253404681086389004
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

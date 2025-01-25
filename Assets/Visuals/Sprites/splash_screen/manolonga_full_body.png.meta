@@ -134,7 +134,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      manolonga_full_body_0: -7484590102797478970
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

@@ -134,7 +134,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Splash_screen_Monster_win_0: -2942125624950381887
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
