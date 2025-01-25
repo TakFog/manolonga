@@ -636,8 +636,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 264.98364, y: -464.81104}
-  m_SizeDelta: {x: 220.0083, y: 27.5945}
+  m_AnchoredPosition: {x: 187.0476, y: -464.81104}
+  m_SizeDelta: {x: 258.9763, y: 27.5945}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &279179823
 MonoBehaviour:
@@ -848,7 +848,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Indirizzo del server
+  m_text: Server address
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: a82845bc03d3440d4bc7510259a0e74d, type: 2}
   m_sharedMaterial: {fileID: -1426584370693913645, guid: a82845bc03d3440d4bc7510259a0e74d, type: 2}
@@ -913,7 +913,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: -288.43665, y: -27.304749, z: -120.30188, w: -80.71942}
+  m_margin: {x: -288.43665, y: -27.304749, z: 127.423096, w: -80.71942}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
