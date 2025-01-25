@@ -14,16 +14,13 @@ public class ExitDirection : MonoBehaviour
     public GameObject east;
     public GameObject northeast;
     
-    public Exit[] exits;
-
     public void ShowExitDirection()
     {
         var playerPos = Globals.Player.transform.position;
         Vector3 minpos = playerPos;
         float minsqrt = float.MaxValue;
-        foreach (var exit in exits)
+        foreach (var exit in ExitManager.Instance.OpenedExits)
         {
-            if (!exit.opened) continue;
             var sqrt = (playerPos - exit.transform.position).sqrMagnitude;
             if (sqrt < minsqrt)
             {

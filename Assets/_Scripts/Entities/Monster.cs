@@ -40,4 +40,17 @@ public class Monster : Entity
     {
         throw new System.NotImplementedException();
     }
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.CompareTag("Exit"))
+        {
+            print("Close Exit");
+        }
+
+        if (other.CompareTag("Player"))
+        {
+            print("Monster wins");
+        }
+    }
 }
