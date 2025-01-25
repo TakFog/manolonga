@@ -1,12 +1,14 @@
 ﻿using System;
+using DG.DemiLib.Attributes;
 using UnityEngine;
 
+[DeScriptExecutionOrder(-1)]
 public class StateManager : MonoBehaviour
 {
     public static StateManager Instance { get; private set; }
     public event Action OnRoundCompleted;    
     public State CurrentState { get; private set; }
-    public int Round { get; private set; } = 0;
+    public int Round { get; private set; }
 
     private void Awake()
     {
@@ -28,6 +30,7 @@ public class StateManager : MonoBehaviour
     public void NextRound()
     {
         Round++;
+        OnRoundCompleted?.Invoke();
     }
     private void Update()
     {

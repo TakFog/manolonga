@@ -2,5 +2,8 @@
 
 public class Exit : MonoBehaviour
 {
-    public bool opened;
+    public void CloseExit()
+    {
+        ExitManager.Instance.CloseExit(this);
+    }
 }
