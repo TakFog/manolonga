@@ -13,8 +13,9 @@ public class WaitForExecutionState : State
     public override void Enter()
     {
         base.Enter();
-        StateManager.Instance.StartCoroutine(C_Execute());
+        // StateManager.Instance.StartCoroutine(C_Execute());
     }
+
 
     IEnumerator C_Execute()
     {
@@ -25,6 +26,7 @@ public class WaitForExecutionState : State
         yield return new WaitWhile(()=> child.IsExecuting || monster.IsExecuting);
         StateManager.Instance.ChangeState(new WaitForEndingRoundState());
     }
+
     
     public override void Exit()
     {
