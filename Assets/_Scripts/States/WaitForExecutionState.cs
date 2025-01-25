@@ -13,19 +13,19 @@ public class WaitForExecutionState : State
     public override void Enter()
     {
         base.Enter();
-        StateManager.Instance.StartCoroutine(C_Execute());
+        // StateManager.Instance.StartCoroutine(C_Execute());
     }
 
-    IEnumerator C_Execute()
-    {
-        Child child = Globals.Child;
-        Monster monster = Globals.Monster;
-        child.StartCoroutine(child.C_ExecuteChoice(communicationsOfThisRound.ChildChoice));
-        monster.StartCoroutine(monster.C_ExecuteChoice(communicationsOfThisRound.MonsterChoice));
-        yield return new WaitUntil()
-        StateManager.Instance.NextRound();
-        StateManager.Instance.ChangeState(new WaitForActionChoiceState());
-    }
+    // IEnumerator C_Execute()
+    // {
+    //     Child child = Globals.Child;
+    //     Monster monster = Globals.Monster;
+    //     child.StartCoroutine(child.C_ExecuteChoice(communicationsOfThisRound.ChildChoice));
+    //     monster.StartCoroutine(monster.C_ExecuteChoice(communicationsOfThisRound.MonsterChoice));
+    //     // yield return new WaitUntil()
+    //     StateManager.Instance.NextRound();
+    //     StateManager.Instance.ChangeState(new WaitForActionChoiceState());
+    // }
     
     public override void Exit()
     {
