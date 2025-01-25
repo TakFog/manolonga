@@ -93,4 +93,21 @@ public class CommunicationManager : MonoBehaviour
 
         return communicationsOfThisRound;
     }
+
+    [ContextMenu("Send Test Move")]
+    public void ContextMenu()
+    {
+        var choice = new Choice()
+        {
+            ActionType = EntityAction.Run,
+            EndCell = new Vector3Int()
+            {
+                x= 1,
+                y = 1,
+                z = 1,
+            },
+            Round = 1
+        };
+        MoveInsert(choice);
+    }
 }
