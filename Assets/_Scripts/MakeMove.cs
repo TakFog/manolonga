@@ -1,7 +1,7 @@
 using System;
 using System.Collections;
-using System.Collections.Generic;
 using System.Text;
+using JetBrains.Annotations;
 using UnityEngine;
 using UnityEngine.Networking;
 
@@ -9,12 +9,21 @@ public class MakeMove : MonoBehaviour
 {
     public PlayerType player;
     public float waitSeconds = 1f;
-    public Move moveObjectForTest; // TODO Remove
+    public Choice moveObjectForTest; // TODO Remove
     private Coroutine _startCoroutine;
-
-    public void MoveInsert(Move move)
+    public static MakeMove Instance;
+    private bool coroutineIsRunning = false;
+    
+    private void Awake()
     {
-        if (_startCoroutine == null)
+        Instance = this;
+    }
+
+    public event Action<MoveData> OnMovesReceived;
+
+    public void MoveInsert(Choice move)
+    {
+        if (_startCoroutine == null || !coroutineIsRunning)
         {
             _startCoroutine = StartCoroutine(Request(move));
         }
@@ -28,20 +37,23 @@ public class MakeMove : MonoBehaviour
         }
     }
 
-    IEnumerator Request(Move move)
+    IEnumerator Request(Choice choice)
     {
+        coroutineIsRunning = true;
         // Create a new instance of the WebRequest class
         while (true)
         {
-            var request = prepareRequest(move);
+            var request = prepareRequest(choice);
             // Wait for the request to complete
             yield return request.SendWebRequest();
 
             if (request.result == UnityWebRequest.Result.Success)
             {
                 var movesOfThisRound = handleSuccess(request);
-                if (movesOfThisRound.Count >= 2)
+                if (movesOfThisRound.hasMonster && movesOfThisRound.hasChild)
                 {
+                    // Send event
+                    OnMovesReceived?.Invoke(movesOfThisRound);
                     Debug.Log("Both moves are received: " + JsonUtility.ToJson(movesOfThisRound));
                     break;
                 }
@@ -56,47 +68,44 @@ public class MakeMove : MonoBehaviour
                 yield return new WaitForSeconds(waitSeconds);
             }
         }
+
+        coroutineIsRunning = false;
     }
 
-    private UnityWebRequest prepareRequest(Move move)
+    private UnityWebRequest prepareRequest(Choice choice)
     {
-        var request = new UnityWebRequest("http://localhost:8080/updateState/" + player + "/" + move.round, "POST");
-        request.uploadHandler = new UploadHandlerRaw(Encoding.UTF8.GetBytes(JsonUtility.ToJson(move)));
+        var request = new UnityWebRequest("http://localhost:8080/updateState/" + player + "/" + choice.round, "POST");
+        request.uploadHandler = new UploadHandlerRaw(Encoding.UTF8.GetBytes(JsonUtility.ToJson(choice)));
         request.downloadHandler = new DownloadHandlerBuffer();
         request.SetRequestHeader("Content-Type", "application/json");
         return request;
     }
 
-    private static Dictionary<string, Move> handleSuccess(UnityWebRequest request)
+    private static MoveData handleSuccess(UnityWebRequest request)
     {
-        Dictionary<string, Move> movesOfThisRound;
+        MoveData movesOfThisRound;
         var downloadHandlerText = request.downloadHandler.text;
         movesOfThisRound =
-            JsonUtility.FromJson<Dictionary<String, Move>>(downloadHandlerText);
+            JsonUtility.FromJson<MoveData>(downloadHandlerText);
         Debug.Log("Response: " + downloadHandlerText);
-
-        foreach (var fromJsonKey in movesOfThisRound.Keys)
-        {
-            var s = movesOfThisRound[fromJsonKey].player;
-            var i = movesOfThisRound[fromJsonKey].round;
-
-            Debug.Log("Key: " + fromJsonKey + " - " + s + " - " + i);
-        }
+        Debug.Log("Monster: " + movesOfThisRound.Monster?.round + "/" + movesOfThisRound.Monster?.actionType + "/" + movesOfThisRound.Monster?.endCell + "/" + movesOfThisRound.hasChild + "/" + movesOfThisRound.hasMonster);
+        Debug.Log("Child: " + movesOfThisRound.Child?.round + "/" + movesOfThisRound.Child?.actionType + "/" + movesOfThisRound.Child?.endCell + "/" + movesOfThisRound.hasChild + "/" + movesOfThisRound.hasMonster);
 
         return movesOfThisRound;
-    }
-
-    [Serializable]
-    public class Move
-    {
-        public PlayerType player;
-        public int round;
-        public Vector2 position;
     }
 
     public enum PlayerType
     {
         Child,
         Monster,
+    }
+    
+    [Serializable]
+    public class MoveData
+    {
+        public Choice Monster;
+        public Choice Child;
+        public bool hasMonster;
+        public bool hasChild;
     }
 }

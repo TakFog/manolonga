@@ -14,16 +14,16 @@ public class Child : MonoBehaviour
         //DebugLogConsole.
     }
 
-    public IEnumerator ChooseAction(ChildActions action)
+    public IEnumerator ChooseAction(EntityAction action)
     {
         switch (action)
         {
-            case ChildActions.Walk:
+            case EntityAction.Walk:
                 
                 break;
-            case ChildActions.Run:
+            case EntityAction.Run:
                 break;
-            case ChildActions.CheckWind:
+            case EntityAction.CheckWind:
                 break;
         }
         SendAction();
@@ -34,17 +34,17 @@ public class Child : MonoBehaviour
     {
         print("sending action");
     }
-    public void ExecuteAction(ChildActions action)
+    public void ExecuteAction(EntityAction action)
     {
         switch (action)
         {
-            case ChildActions.Walk:
+            case EntityAction.Walk:
                 ExecuteWalk(new Vector3Int(0, 0, 0));
                 break;
-            case ChildActions.Run:
+            case EntityAction.Run:
                 ExecuteRun(new Vector3Int(0, 0, 0));
                 break;
-            case ChildActions.CheckWind:
+            case EntityAction.CheckWind:
                 ExecuteCheckWind();
                 break;
         }
@@ -67,7 +67,7 @@ public class Child : MonoBehaviour
     }
 }
 
-public enum ChildActions
+public enum EntityAction
 {
     Walk,
     Run,
@@ -76,20 +76,20 @@ public enum ChildActions
 
 public class Childd : MonoBehaviour
 {
-    public void ChooseAction(ChildActions action)
+    public void ChooseAction(EntityAction action)
     {
         if (StateManager.Instance.CurrentState.GetType() != typeof(WaitForActionChoiceState))
             return;
 
         switch (action)
         {
-            case ChildActions.Walk:
+            case EntityAction.Walk:
                 StateManager.Instance.ChangeState(new WaitForMovementActionTileChoiceState());
                 break;
-            case ChildActions.Run:
+            case EntityAction.Run:
                 StateManager.Instance.ChangeState(new WaitForMovementActionTileChoiceState());
                 break;
-            case ChildActions.CheckWind:
+            case EntityAction.CheckWind:
                 StateManager.Instance.ChangeState(new SendChoiceState());
                 break;
         }
@@ -201,8 +201,10 @@ public class WaitForActionExecutionState : State
     }
 }
 
+[Serializable]
 public class Choice
 {
-    public ChildActions ActionType { get; private set; }
-    public Vector3Int EndCell { get; private set; }
+    public int round;
+    public EntityAction actionType;
+    public Vector3Int endCell;
 }
