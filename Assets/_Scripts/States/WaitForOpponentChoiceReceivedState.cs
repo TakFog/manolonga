@@ -3,7 +3,7 @@
     public override void Enter()
     {
         base.Enter();
-        //Subscribe to moves received event
+        CommunicationManager
     }
     void MovesReceived()
     {
