@@ -16,7 +16,7 @@ public class Player : MonoBehaviour
     public void ChooseAction(EntityActionType actionType)
     {
         Choice choice = new Choice();
-        choice.actionTypeType = actionType;
+        choice.actionType = actionType;
 
         switch (actionType)
         {
