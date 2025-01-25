@@ -1,5 +1,6 @@
 package org.gamejam.gamejammultiplayerservice;
 
+import com.fasterxml.jackson.databind.JsonNode;
 import org.slf4j.Logger;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -12,11 +13,11 @@ import java.util.concurrent.ConcurrentHashMap;
 @RestController
 public class GameJamMultiplayerServiceApplication {
     private static final Logger log = org.slf4j.LoggerFactory.getLogger(GameJamMultiplayerServiceApplication.class);
-    private final Map<Integer, Map<String, String>> stateByPlayer = new ConcurrentHashMap<>();
+    private final Map<Integer, Map<String, JsonNode>> stateByPlayer = new ConcurrentHashMap<>();
 
-    @PostMapping("/updateState/{playerId}/{roundId}")
-    Map<String, String> updateState(@PathVariable String playerId, @PathVariable final int roundId, @RequestBody String statePayload) {
-        Map<String, String> stringStringMap = stateByPlayer.computeIfAbsent(roundId, k -> new ConcurrentHashMap<>());
+    @PostMapping(path = "/updateState/{playerId}/{roundId}", produces = "application/json")
+    Map<String, JsonNode> updateState(@PathVariable String playerId, @PathVariable final int roundId, @RequestBody JsonNode statePayload) {
+        Map<String, JsonNode> stringStringMap = stateByPlayer.computeIfAbsent(roundId, k -> new ConcurrentHashMap<>());
         stringStringMap.put(playerId, statePayload);
         stateByPlayer.remove(roundId - 2); // Clean up old states
         log.info("State updated for player {} in round {}: {}", playerId, roundId, stateByPlayer);
