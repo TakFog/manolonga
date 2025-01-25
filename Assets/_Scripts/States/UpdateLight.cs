@@ -1,37 +1,56 @@
 using UnityEngine;
 using UnityEngine.Rendering.Universal;
 
-namespace _Scripts.States
+public class UpdateLight : MonoBehaviour
 {
-    public class UpdateLight: MonoBehaviour
+    public Light2D light2D;
+    public float decreaseAmount = 1f;
+    public float defaultRadius = 2.5f;
+
+    private void OnEnable()
     {
-        public Light2D light2D;
+        StateManager.Instance.OnRoundCompleted += DecreaseLight;
+        Debug.Log("Update light subscribed to OnRoundCompleted event");
+    }
 
-        private void OnEnable()
-        {
-            StateManager.Instance.OnRoundCompleted += UpdateLight2D;
-            Debug.Log("Update light subscribed to OnRoundCompleted event");
-        }
+    private void OnDisable()
+    {
+        StateManager.Instance.OnRoundCompleted -= DecreaseLight;
+        Debug.Log("Update light unsubscribed from OnRoundCompleted event");
+    }
 
-        private void OnDisable()
-        {
-            StateManager.Instance.OnRoundCompleted -= UpdateLight2D;
-            Debug.Log("Update light unsubscribed from OnRoundCompleted event");
-        }
+    private void DecreaseLight()
+    {
+        UpdateLight2D(decreaseAmount * -1);
+    }
 
-        private void UpdateLight2D()
+    public void ResetLight()
+    {
+        light2D.pointLightOuterRadius = defaultRadius;
+    }
+    
+    private void UpdateLight2D(float points)
+    {
+        if (light2D != null)
         {
-            if (light2D != null)
+            if (light2D.pointLightOuterRadius + points < 0)
             {
-                // Decrease the Outer Radius by 1
-                light2D.pointLightOuterRadius -= 1;
-
-                Debug.Log("Updated Outer Radius: " + light2D.pointLightOuterRadius);
+                Debug.LogError("Outer Radius cannot be less than 0!");
+                return;
             }
-            else
+            if (light2D.pointLightOuterRadius + points > 3)
             {
-                Debug.LogError("Light2D component not found on GameObject!");
+                Debug.LogError("Outer Radius cannot be more than 3!");
+                return;
             }
+            
+            light2D.pointLightOuterRadius += points;
+
+            Debug.Log("Updated Outer Radius: " + light2D.pointLightOuterRadius);
+        }
+        else
+        {
+            Debug.LogError("Light2D component not found on GameObject!");
         }
     }
 }
