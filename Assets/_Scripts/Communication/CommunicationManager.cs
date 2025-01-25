@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using System.Text;
 using UnityEngine;
 using UnityEngine.Networking;
@@ -10,7 +11,6 @@ public class CommunicationManager : MonoBehaviour
 
     public PlayerType player;
     public float waitSeconds = 1f;
-    public string stateServerAddress = "localhost:8080";
     public Choice moveObjectForTest; // TODO Remove
     private Coroutine _startCoroutine;
     public static CommunicationManager Instance;
@@ -20,7 +20,7 @@ public class CommunicationManager : MonoBehaviour
     {
         Instance = this;
     }
-    
+
     public void MoveInsert(Choice move)
     {
         if (_startCoroutine == null || !coroutineIsRunning)
@@ -74,7 +74,8 @@ public class CommunicationManager : MonoBehaviour
 
     private UnityWebRequest prepareRequest(Choice choice)
     {
-        var request = new UnityWebRequest("http://" + stateServerAddress + "/updateState/" + player + "/" + choice.Round, "POST");
+        var request =
+            new UnityWebRequest("http://" + Globals.ServerAddress + "/updateState/" + player + "/" + choice.Round, "POST");
         request.uploadHandler = new UploadHandlerRaw(Encoding.UTF8.GetBytes(JsonUtility.ToJson(choice)));
         request.downloadHandler = new DownloadHandlerBuffer();
         request.SetRequestHeader("Content-Type", "application/json");
@@ -88,8 +89,14 @@ public class CommunicationManager : MonoBehaviour
         communicationsOfThisRound =
             JsonUtility.FromJson<CommunicationData>(downloadHandlerText);
         Debug.Log("Response: " + downloadHandlerText);
-        Debug.Log("Monster: " + communicationsOfThisRound.MonsterChoice?.Round + "/" + communicationsOfThisRound.MonsterChoice?.actionType + "/" + communicationsOfThisRound.MonsterChoice?.EndCell + "/" + communicationsOfThisRound.hasChild + "/" + communicationsOfThisRound.hasMonster);
-        Debug.Log("Child: " + communicationsOfThisRound.ChildChoice?.Round + "/" + communicationsOfThisRound.ChildChoice?.actionType + "/" + communicationsOfThisRound.ChildChoice?.EndCell + "/" + communicationsOfThisRound.hasChild + "/" + communicationsOfThisRound.hasMonster);
+        Debug.Log("Monster: " + communicationsOfThisRound.MonsterChoice?.Round + "/" +
+                  communicationsOfThisRound.MonsterChoice?.actionType + "/" +
+                  communicationsOfThisRound.MonsterChoice?.PositionsPath + "/" + communicationsOfThisRound.hasChild +
+                  "/" + communicationsOfThisRound.hasMonster);
+        Debug.Log("Child: " + communicationsOfThisRound.ChildChoice?.Round + "/" +
+                  communicationsOfThisRound.ChildChoice?.actionType + "/" +
+                  communicationsOfThisRound.ChildChoice?.PositionsPath + "/" + communicationsOfThisRound.hasChild +
+                  "/" + communicationsOfThisRound.hasMonster);
 
         return communicationsOfThisRound;
     }
@@ -99,12 +106,15 @@ public class CommunicationManager : MonoBehaviour
     {
         var choice = new Choice()
         {
-            actionTypeType = EntityActionType.Attack,
-            EndCell = new Vector3Int()
+            actionType = EntityActionType.Attack,
+            PositionsPath = new List<Vector3>()
             {
-                x= 1,
-                y = 1,
-                z = 1,
+                new()
+                {
+                    x = 1,
+                    y = 1,
+                    z = 1,
+                }
             },
             Round = 1
         };
