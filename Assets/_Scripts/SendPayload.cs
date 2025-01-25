@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Text;
@@ -33,31 +34,27 @@ public class SendPayload : MonoBehaviour
         if (request.result == UnityWebRequest.Result.Success)
         {
             var downloadHandlerText = request.downloadHandler.text;
-            var fromJson = JsonUtility.FromJson<MyDictionary>(downloadHandlerText);
+            var fromJson = JsonUtility.FromJson<Dictionary<String, Payload>>(downloadHandlerText);
             Debug.Log("Response: " + downloadHandlerText);
             
-                var valueOfPlayer = fromJson.monster;
-                var deserialzied = JsonUtility.FromJson<Payload>(valueOfPlayer);
-                Debug.Log("monster: " + deserialzied.player + " - " + deserialzied.round);
-            
+            foreach (var fromJsonKey in fromJson.Keys)
+            {
+                var s = fromJson[fromJsonKey].player;
+                var i = fromJson[fromJsonKey].round;
+                
+                Debug.Log("Key: " + fromJsonKey + " - " + s + " - " + i);
+            }
         }
         else
         {
             Debug.LogError("Error: " + request.error);
         }
     }
-    
-    [System.Serializable]
+
+    [Serializable]
     public class Payload
     {
         public string player;
         public int round;
-    }
-    
-    [System.Serializable]
-    public class MyDictionary 
-    {
-        public string monster;
-        public string child;
     }
 }
