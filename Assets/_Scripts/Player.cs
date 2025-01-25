@@ -14,7 +14,7 @@ public class Player : MonoBehaviour
         child = Globals.Child;
         monster = Globals.Monster;
         
-        DebugLogConsole.AddCommandInstance("ca", "Choose action", "ChooseAction", this);
+        DebugLogConsole.AddCommandInstance("choose", "Choose action", "ChooseAction", this);
     }
 
     public void ChooseAction(EntityActionType actionType)

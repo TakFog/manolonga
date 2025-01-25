@@ -11,34 +11,53 @@ public class CommunicationManager : MonoBehaviour
     public float waitSeconds = 1f;
     private Coroutine _startCoroutine;
     public static CommunicationManager Instance;
-    private bool coroutineIsRunning = false;
+    private bool hasChildSentRequest;
+    private bool hasMonsterSentRequest;
     
     private void Awake()
     {
         Instance = this;
     }
 
-    public void SubmitChoice(Choice move, PlayerType player)
+    private void OnEnable()
     {
-        if (_startCoroutine == null || !coroutineIsRunning)
-        {
-            _startCoroutine = StartCoroutine(Request(move, player));
-        }
+        StateManager.Instance.OnRoundCompleted += NextRound;
     }
 
-    IEnumerator Request(Choice choice, PlayerType player)
+    private void OnDisable()
     {
-        coroutineIsRunning = true;
+        StateManager.Instance.OnRoundCompleted -= NextRound;
+    }
+
+    void NextRound()
+    {
+        hasChildSentRequest = false;
+        hasMonsterSentRequest = false;
+    }
+
+    public void SubmitChoice(Choice move, PlayerType player, int round)
+    {
+        if (player == PlayerType.Child && !hasChildSentRequest)
+            hasChildSentRequest = true;
+        else if (player == PlayerType.Monster && !hasMonsterSentRequest)
+            hasMonsterSentRequest = true;
+        else
+            return;
+        _startCoroutine = StartCoroutine(Request(move, player, round));
+    }
+
+    IEnumerator Request(Choice choice, PlayerType player, int round)
+    {
         // Create a new instance of the WebRequest class
         while (true)
         {
-            var request = prepareRequest(choice, player);
+            var request = prepareRequest(choice, player, round);
             // Wait for the request to complete
             yield return request.SendWebRequest();
 
             if (request.result == UnityWebRequest.Result.Success)
             {
-                var movesOfThisRound = handleSuccess(request);
+                var movesOfThisRound = handleSuccess(request, round);
                 if (movesOfThisRound.hasMonster && movesOfThisRound.hasChild)
                 {
                     // Send event
@@ -57,47 +76,27 @@ public class CommunicationManager : MonoBehaviour
                 yield return new WaitForSeconds(waitSeconds);
             }
         }
-
-        coroutineIsRunning = false;
     }
 
-    private UnityWebRequest prepareRequest(Choice choice, PlayerType player)
+    private UnityWebRequest prepareRequest(Choice choice, PlayerType player, int round)
     {
-        var request = new UnityWebRequest("http://localhost:8080/updateState/" + player + "/" + choice.Round, "POST");
+        var request = new UnityWebRequest("http://localhost:8080/updateState/" + player + "/" + round, "POST");
         request.uploadHandler = new UploadHandlerRaw(Encoding.UTF8.GetBytes(JsonUtility.ToJson(choice)));
         request.downloadHandler = new DownloadHandlerBuffer();
         request.SetRequestHeader("Content-Type", "application/json");
         return request;
     }
 
-    private static CommunicationData handleSuccess(UnityWebRequest request)
+    private static CommunicationData handleSuccess(UnityWebRequest request, int round)
     {
         CommunicationData communicationsOfThisRound;
         var downloadHandlerText = request.downloadHandler.text;
         communicationsOfThisRound =
             JsonUtility.FromJson<CommunicationData>(downloadHandlerText);
         Debug.Log("Response: " + downloadHandlerText);
-        Debug.Log("Monster: " + communicationsOfThisRound.MonsterChoice?.Round + "/" + communicationsOfThisRound.MonsterChoice?.actionType + "/" + communicationsOfThisRound.MonsterChoice?.PositionsPath + "/" + communicationsOfThisRound.hasChild + "/" + communicationsOfThisRound.hasMonster);
-        Debug.Log("Child: " + communicationsOfThisRound.ChildChoice?.Round + "/" + communicationsOfThisRound.ChildChoice?.actionType + "/" + communicationsOfThisRound.ChildChoice?.PositionsPath + "/" + communicationsOfThisRound.hasChild + "/" + communicationsOfThisRound.hasMonster);
+        Debug.Log("Monster: " + round + "/" + communicationsOfThisRound.MonsterChoice?.actionType + "/" + communicationsOfThisRound.MonsterChoice?.PositionsPath + "/" + communicationsOfThisRound.hasChild + "/" + communicationsOfThisRound.hasMonster);
+        Debug.Log("Child: " + round + "/" + communicationsOfThisRound.ChildChoice?.actionType + "/" + communicationsOfThisRound.ChildChoice?.PositionsPath + "/" + communicationsOfThisRound.hasChild + "/" + communicationsOfThisRound.hasMonster);
 
         return communicationsOfThisRound;
-    }
-}
-
-public class TESTCommunicationManager : MonoBehaviour
-{
-    public static TESTCommunicationManager Instance;
-    public PlayerType player;
-    public Choice choice; // TODO Remove
-
-    private void Awake()
-    {
-        Instance = this;
-    }
-
-
-    public static void SendFakeChoice()
-    {
-        CommunicationManager.Instance.SubmitChoice(Instance.choice, Instance.player);
     }
 }

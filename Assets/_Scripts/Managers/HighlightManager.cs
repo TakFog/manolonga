@@ -19,7 +19,7 @@ public class HighlightManager : MonoBehaviour
     {
         if(highlightedCells.Contains(cellPosition))
             return;
-        var highlightedObject = Instantiate(highlightObjectPrefab);
+        var highlightedObject = Instantiate(highlightObjectPrefab, TilemapManager.Instance.GetCellWorldCenterPosition(cellPosition), Quaternion.identity);
         highlightObjects.Add(cellPosition, highlightedObject);
         highlightedCells.Add(cellPosition);
     }
