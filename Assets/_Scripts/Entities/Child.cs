@@ -2,10 +2,6 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class Entity : MonoBehaviour
-{
-    
-}
 public class Child : Entity
 {
     [SerializeField, Range(1, 10)] private int walkDistance;
@@ -41,9 +37,9 @@ public class Child : Entity
                 break;
         }
     }
-    public void MovesReceived(MoveData moves)
+    public void MovesReceived(CommunicationData communications)
     {
-        ExecuteChoice(moves.Child);
+        ExecuteChoice(communications.Child);
     }
     public void ExecuteChoice(Choice choice)
     {
@@ -73,6 +69,3 @@ public class Child : Entity
         
     }
 }
-public class Monster : Entity
-
-public class Player : MonoBehaviour

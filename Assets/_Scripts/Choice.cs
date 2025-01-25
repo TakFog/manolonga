@@ -1,6 +1,10 @@
 ﻿using UnityEngine;
+using UnityEngine.Serialization;
+
+[System.Serializable]
 public class Choice
 {
-    public EntityAction ActionType { get; set; }
-    public Vector3Int EndCell { get; set; }
+    [FormerlySerializedAs("actionType")] public EntityAction ActionType;
+    [FormerlySerializedAs("endCell")] public Vector3Int EndCell;
+    [FormerlySerializedAs("round")] public int Round;
 }

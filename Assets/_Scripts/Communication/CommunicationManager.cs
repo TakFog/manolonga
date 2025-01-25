@@ -5,22 +5,22 @@ using JetBrains.Annotations;
 using UnityEngine;
 using UnityEngine.Networking;
 
-public class MakeMove : MonoBehaviour
+public class CommunicationManager : MonoBehaviour
 {
+    public event Action<CommunicationData> OnMovesReceived;
+
     public PlayerType player;
     public float waitSeconds = 1f;
     public Choice moveObjectForTest; // TODO Remove
     private Coroutine _startCoroutine;
-    public static MakeMove Instance;
+    public static CommunicationManager Instance;
     private bool coroutineIsRunning = false;
     
     private void Awake()
     {
         Instance = this;
     }
-
-    public event Action<MoveData> OnMovesReceived;
-
+    
     public void MoveInsert(Choice move)
     {
         if (_startCoroutine == null || !coroutineIsRunning)
@@ -74,38 +74,23 @@ public class MakeMove : MonoBehaviour
 
     private UnityWebRequest prepareRequest(Choice choice)
     {
-        var request = new UnityWebRequest("http://localhost:8080/updateState/" + player + "/" + choice.round, "POST");
+        var request = new UnityWebRequest("http://localhost:8080/updateState/" + player + "/" + choice.Round, "POST");
         request.uploadHandler = new UploadHandlerRaw(Encoding.UTF8.GetBytes(JsonUtility.ToJson(choice)));
         request.downloadHandler = new DownloadHandlerBuffer();
         request.SetRequestHeader("Content-Type", "application/json");
         return request;
     }
 
-    private static MoveData handleSuccess(UnityWebRequest request)
+    private static CommunicationData handleSuccess(UnityWebRequest request)
     {
-        MoveData movesOfThisRound;
+        CommunicationData communicationsOfThisRound;
         var downloadHandlerText = request.downloadHandler.text;
-        movesOfThisRound =
-            JsonUtility.FromJson<MoveData>(downloadHandlerText);
+        communicationsOfThisRound =
+            JsonUtility.FromJson<CommunicationData>(downloadHandlerText);
         Debug.Log("Response: " + downloadHandlerText);
-        Debug.Log("Monster: " + movesOfThisRound.Monster?.round + "/" + movesOfThisRound.Monster?.actionType + "/" + movesOfThisRound.Monster?.endCell + "/" + movesOfThisRound.hasChild + "/" + movesOfThisRound.hasMonster);
-        Debug.Log("Child: " + movesOfThisRound.Child?.round + "/" + movesOfThisRound.Child?.actionType + "/" + movesOfThisRound.Child?.endCell + "/" + movesOfThisRound.hasChild + "/" + movesOfThisRound.hasMonster);
+        Debug.Log("Monster: " + communicationsOfThisRound.Monster?.Round + "/" + communicationsOfThisRound.Monster?.ActionType + "/" + communicationsOfThisRound.Monster?.EndCell + "/" + communicationsOfThisRound.hasChild + "/" + communicationsOfThisRound.hasMonster);
+        Debug.Log("Child: " + communicationsOfThisRound.Child?.Round + "/" + communicationsOfThisRound.Child?.ActionType + "/" + communicationsOfThisRound.Child?.EndCell + "/" + communicationsOfThisRound.hasChild + "/" + communicationsOfThisRound.hasMonster);
 
-        return movesOfThisRound;
-    }
-
-    public enum PlayerType
-    {
-        Child,
-        Monster,
-    }
-    
-    [Serializable]
-    public class MoveData
-    {
-        public Choice Monster;
-        public Choice Child;
-        public bool hasMonster;
-        public bool hasChild;
+        return communicationsOfThisRound;
     }
 }
