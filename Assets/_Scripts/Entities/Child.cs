@@ -1,7 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using Microsoft.Win32.SafeHandles;
+using DG.Tweening;
 using UnityEngine;
 
 public class Child : Entity
@@ -33,15 +33,17 @@ public class Child : Entity
     
     public IEnumerator C_Walk(List<Vector3> positionsPath)
     {
-        throw new NotImplementedException();
-        foreach (var cell in positionsPath)
+        for (int i = 0; i < positionsPath.Count; i++)
         {
-            
+            yield return transform.DOMove(positionsPath[i], MovementAnimationDuration/positionsPath.Count).SetEase(MovementAnimationEase).WaitForCompletion();
         }
     }
     public IEnumerator C_Run(List<Vector3> positionsPath)
     {
-        throw new NotImplementedException();
+        for (int i = 0; i < positionsPath.Count; i++)
+        {
+            yield return transform.DOMove(positionsPath[i], MovementAnimationDuration/positionsPath.Count).SetEase(MovementAnimationEase).WaitForCompletion();
+        }
     }
     
 }

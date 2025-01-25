@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using DG.Tweening;
 using UnityEngine;
 
 public class Monster : Entity
@@ -30,7 +31,10 @@ public class Monster : Entity
 
     private IEnumerator C_Move(List<Vector3> positionsPath)
     {
-        throw new System.NotImplementedException();
+        for (int i = 0; i < positionsPath.Count; i++)
+        {
+            yield return transform.DOMove(positionsPath[i], MovementAnimationDuration/positionsPath.Count).SetEase(MovementAnimationEase).WaitForCompletion();
+        }
     }
     private IEnumerator C_Attack(List<Vector3> positionsPath)
     {

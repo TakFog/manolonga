@@ -6,7 +6,7 @@ public class HighlightManager : MonoBehaviour
 {
     public static HighlightManager Instance;
     
-    GameObject highlightObjectPrefab;
+    [SerializeField] GameObject highlightObjectPrefab;
     Dictionary<Vector3Int, GameObject> highlightObjects = new Dictionary<Vector3Int, GameObject>();
     List<Vector3Int> highlightedCells = new List<Vector3Int>();
 
@@ -19,7 +19,7 @@ public class HighlightManager : MonoBehaviour
     {
         if(highlightedCells.Contains(cellPosition))
             return;
-        var highlightedObject = Instantiate(highlightObjectPrefab);
+        var highlightedObject = Instantiate(highlightObjectPrefab, TilemapManager.Instance.GetCellWorldCenterPosition(cellPosition), Quaternion.identity);
         highlightObjects.Add(cellPosition, highlightedObject);
         highlightedCells.Add(cellPosition);
     }

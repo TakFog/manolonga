@@ -3,8 +3,8 @@
 [System.Serializable]
 public class CommunicationData
 {
-    [FormerlySerializedAs("Monster")] public Choice MonsterChoice;
-    [FormerlySerializedAs("Child")] public Choice ChildChoice;
+    public Choice Monster;
+    public Choice Child;
     public bool hasMonster;
     public bool hasChild;
 }
