@@ -13,20 +13,20 @@ import java.util.concurrent.ConcurrentHashMap;
 @RestController
 public class GameJamMultiplayerServiceApplication {
     private static final Logger log = org.slf4j.LoggerFactory.getLogger(GameJamMultiplayerServiceApplication.class);
-    private final Map<Integer, Map<String, JsonNode>> stateByPlayer = new ConcurrentHashMap<>();
+    private final Map<Integer, Map<String, JsonNode>> stateByRound = new ConcurrentHashMap<>();
 
     @PostMapping(path = "/updateState/{playerId}/{roundId}", produces = "application/json")
     Map<String, JsonNode> updateState(@PathVariable String playerId, @PathVariable final int roundId, @RequestBody JsonNode statePayload) {
-        Map<String, JsonNode> stringStringMap = stateByPlayer.computeIfAbsent(roundId, k -> new ConcurrentHashMap<>());
+        Map<String, JsonNode> stringStringMap = stateByRound.computeIfAbsent(roundId, k -> new ConcurrentHashMap<>());
         stringStringMap.put(playerId, statePayload);
-        stateByPlayer.remove(roundId - 2); // Clean up old states
-        log.info("State updated for player {} in round {}: {}", playerId, roundId, stateByPlayer);
+        stateByRound.remove(roundId - 2); // Clean up old states
+        log.info("State updated for player {} in round {}: {}", playerId, roundId, stateByRound);
         return stringStringMap;
     }
 
     @GetMapping("/clear")
     void clear() {
-        stateByPlayer.clear();
+        stateByRound.clear();
     }
 
     public static void main(String[] args) {
