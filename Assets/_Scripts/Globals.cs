@@ -2,21 +2,21 @@ using UnityEngine;
 
 public class Globals
 {
-    public static PlayerType playerType;
-    public static Child child;
-    public static Monster monster;
+    public static PlayerType PlayerType;
+    public static Child Child;
+    public static Monster Monster;
 
     public static GameObject Player
     {
         get
         {
-            if (playerType == PlayerType.Child)
+            if (PlayerType == PlayerType.Child)
             {
-                return child.gameObject;
+                return Child.gameObject;
             }
             else
             {
-                return monster.gameObject;
+                return Monster.gameObject;
             }
         }
     }
