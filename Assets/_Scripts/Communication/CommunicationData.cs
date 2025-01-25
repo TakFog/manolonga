@@ -1,8 +1,10 @@
-﻿[System.Serializable]
+﻿using UnityEngine.Serialization;
+
+[System.Serializable]
 public class CommunicationData
 {
-    public Choice Monster;
-    public Choice Child;
+    [FormerlySerializedAs("Monster")] public Choice MonsterChoice;
+    [FormerlySerializedAs("Child")] public Choice ChildChoice;
     public bool hasMonster;
     public bool hasChild;
 }

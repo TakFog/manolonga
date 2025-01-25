@@ -88,8 +88,8 @@ public class CommunicationManager : MonoBehaviour
         communicationsOfThisRound =
             JsonUtility.FromJson<CommunicationData>(downloadHandlerText);
         Debug.Log("Response: " + downloadHandlerText);
-        Debug.Log("Monster: " + communicationsOfThisRound.Monster?.Round + "/" + communicationsOfThisRound.Monster?.actionTypeType + "/" + communicationsOfThisRound.Monster?.EndCell + "/" + communicationsOfThisRound.hasChild + "/" + communicationsOfThisRound.hasMonster);
-        Debug.Log("Child: " + communicationsOfThisRound.Child?.Round + "/" + communicationsOfThisRound.Child?.actionTypeType + "/" + communicationsOfThisRound.Child?.EndCell + "/" + communicationsOfThisRound.hasChild + "/" + communicationsOfThisRound.hasMonster);
+        Debug.Log("Monster: " + communicationsOfThisRound.MonsterChoice?.Round + "/" + communicationsOfThisRound.MonsterChoice?.actionType + "/" + communicationsOfThisRound.MonsterChoice?.EndCell + "/" + communicationsOfThisRound.hasChild + "/" + communicationsOfThisRound.hasMonster);
+        Debug.Log("Child: " + communicationsOfThisRound.ChildChoice?.Round + "/" + communicationsOfThisRound.ChildChoice?.actionType + "/" + communicationsOfThisRound.ChildChoice?.EndCell + "/" + communicationsOfThisRound.hasChild + "/" + communicationsOfThisRound.hasMonster);
 
         return communicationsOfThisRound;
     }
