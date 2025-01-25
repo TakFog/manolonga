@@ -19,6 +19,16 @@ public class TilemapManager : MonoBehaviour
     {
         return tilemap.GetCellCenterWorld(cellPosition);
     }
+    public List<Vector3> GetCellWorldCenterPosition(List<Vector3Int> cells)
+    {
+        var points = new List<Vector3>();
+        foreach (var cell in cells)
+        {
+            points.Add(GetCellWorldCenterPosition(cell));
+        }
+        return points;
+    }
+    
     public Vector3Int GetCellAtWorldPosition(Vector3 worldPosition)
     {
         return tilemap.WorldToCell(worldPosition);
@@ -29,46 +39,39 @@ public class TilemapManager : MonoBehaviour
         return true;
     }
 
-    public List<Vector3Int> GetNearCells(Vector3Int cellPosition, int distance)
+    public List<CellPath> GetCellPaths(Vector3Int cellPosition, int distance)
     {
-        if (distance < 1) return new List<Vector3Int>();
+        if (distance < 1) return new List<CellPath>();
+        var result = new List<CellPath>();
         if (distance == 1)
         {
-            var result = new List<Vector3Int>();
-            AddIfWalkable(result, cellPosition, -1, 0);
-            AddIfWalkable(result, cellPosition, 1, 0);
-            if (cellPosition.y % 2 == 0)
+            foreach (var cell in GetNearCells(cellPosition))
             {
-                AddIfWalkable(result, cellPosition, -1, 1);
-                AddIfWalkable(result, cellPosition, -1, -1);
-                AddIfWalkable(result, cellPosition, 0, 1);
-                AddIfWalkable(result, cellPosition, 0, -1);
-            }
-            else
-            {
-                AddIfWalkable(result, cellPosition, 0, 1);
-                AddIfWalkable(result, cellPosition, 0, -1);
-                AddIfWalkable(result, cellPosition, 1, 1);
-                AddIfWalkable(result, cellPosition, 1, -1);
+                result.Add(new CellPath(cell, GetCellAtWorldPosition(cellPosition)));
             }
             return result;
         }
         
         HashSet<Vector3Int> added = new HashSet<Vector3Int>();
-        List<Vector3Int> fringe = new List<Vector3Int>();
-        fringe.Add(cellPosition);
+        List<CellPath> fringe = new List<CellPath>();
+        fringe.Add(new CellPath(cellPosition, new List<Vector3Int>()));
         added.Add(cellPosition);
         for (int i = 0; i < distance; i++)
         {
-            var next = new List<Vector3Int>();
+            var next = new List<CellPath>();
             foreach (var cell in fringe)
             {
-                foreach (var near in GetNearCells(cell, 1))
+                foreach (var near in GetNearCells(cell.cell, 1))
                 {
                     if (!added.Contains(near))
                     {
-                        next.Add(near);
                         added.Add(near);
+                        var nextPath = new List<Vector3Int>();
+                        nextPath.AddRange(cell.path);
+                        nextPath.Add(near);
+                        var cellPath = new CellPath(near, nextPath);
+                        next.Add(cellPath);
+                        result.Add(cellPath);
                     }
                 } 
             }
@@ -76,19 +79,60 @@ public class TilemapManager : MonoBehaviour
             fringe = next;
         }
 
-        added.Remove(cellPosition);
-        return new List<Vector3Int>(added);
+        foreach (var cellPath in result)
+        {
+            cellPath.worldPosition = GetCellWorldCenterPosition(cellPath.cell);
+            cellPath.worldPath = GetCellWorldCenterPosition(cellPath.path);
+        }
+        return result;
+    }
+
+    public List<Vector3Int> GetNearCells(Vector3Int cellPosition)
+    {
+        var result = new List<Vector3Int>();
+        AddIfWalkable(result, cellPosition, -1, 0);
+        AddIfWalkable(result, cellPosition, 1, 0);
+        if (cellPosition.y % 2 == 0)
+        {
+            AddIfWalkable(result, cellPosition, -1, 1);
+            AddIfWalkable(result, cellPosition, -1, -1);
+            AddIfWalkable(result, cellPosition, 0, 1);
+            AddIfWalkable(result, cellPosition, 0, -1);
+        }
+        else
+        {
+            AddIfWalkable(result, cellPosition, 0, 1);
+            AddIfWalkable(result, cellPosition, 0, -1);
+            AddIfWalkable(result, cellPosition, 1, 1);
+            AddIfWalkable(result, cellPosition, 1, -1);
+        }
+        return result;
+    }
+    
+    public List<Vector3Int> GetNearCells(Vector3Int cellPosition, int distance)
+    {
+        if (distance < 1) return new List<Vector3Int>();
+        if (distance == 1)
+        {
+            return GetNearCells(cellPosition);
+        }
+        
+        var result = new List<Vector3Int>();
+        foreach (var cellPath in GetCellPaths(cellPosition, distance))
+        {
+            result.Add(cellPath.cell);
+        }
+        return result;
     }
 
     public List<Vector3> GetNearCellsWorldPoints(Vector3Int cellPosition, int distance)
     {
-        var cells = GetNearCells(cellPosition, distance);
-        var points = new List<Vector3>();
-        foreach (var cell in cells)
+        var result = new List<Vector3>();
+        foreach (var cellPath in GetCellPaths(cellPosition, distance))
         {
-            points.Add(GetCellWorldCenterPosition(cell));
+            result.Add(cellPath.worldPosition);
         }
-        return points;
+        return result;
     }
 
     private void AddIfWalkable(List<Vector3Int> list, Vector3Int cellPosition, int deltax, int deltay)
