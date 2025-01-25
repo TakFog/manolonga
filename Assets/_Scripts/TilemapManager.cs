@@ -19,6 +19,16 @@ public class TilemapManager : MonoBehaviour
     {
         return tilemap.GetCellCenterWorld(cellPosition);
     }
+    public List<Vector3> GetCellWorldCenterPosition(List<Vector3Int> cells)
+    {
+        var points = new List<Vector3>();
+        foreach (var cell in cells)
+        {
+            points.Add(GetCellWorldCenterPosition(cell));
+        }
+        return points;
+    }
+    
     public Vector3Int GetCellAtWorldPosition(Vector3 worldPosition)
     {
         return tilemap.WorldToCell(worldPosition);
@@ -27,6 +37,18 @@ public class TilemapManager : MonoBehaviour
     {
         //TBD
         return true;
+    }
+
+    public List<CellPath> GetCellPaths(Vector3Int cellPosition, int distance)
+    {
+        //mock w/o paths
+        var cells = GetNearCells(cellPosition, distance);
+        var paths = new List<CellPath>();
+        foreach (var cell in GetNearCells(cellPosition, distance))
+        {
+            paths.Add(new CellPath(cell, GetCellWorldCenterPosition(cell)));
+        }
+        return paths;
     }
 
     public List<Vector3Int> GetNearCells(Vector3Int cellPosition, int distance)
@@ -82,13 +104,7 @@ public class TilemapManager : MonoBehaviour
 
     public List<Vector3> GetNearCellsWorldPoints(Vector3Int cellPosition, int distance)
     {
-        var cells = GetNearCells(cellPosition, distance);
-        var points = new List<Vector3>();
-        foreach (var cell in cells)
-        {
-            points.Add(GetCellWorldCenterPosition(cell));
-        }
-        return points;
+        return GetCellWorldCenterPosition(GetNearCells(cellPosition, distance));
     }
 
     private void AddIfWalkable(List<Vector3Int> list, Vector3Int cellPosition, int deltax, int deltay)
