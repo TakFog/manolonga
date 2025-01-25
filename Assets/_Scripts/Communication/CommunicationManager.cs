@@ -1,7 +1,6 @@
 using System;
 using System.Collections;
 using System.Text;
-using JetBrains.Annotations;
 using UnityEngine;
 using UnityEngine.Networking;
 
@@ -99,7 +98,7 @@ public class CommunicationManager : MonoBehaviour
     {
         var choice = new Choice()
         {
-            ActionType = EntityAction.Run,
+            actionTypeType = EntityActionType.Attack,
             EndCell = new Vector3Int()
             {
                 x= 1,
