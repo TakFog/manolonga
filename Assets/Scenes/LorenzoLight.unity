@@ -512,7 +512,7 @@ MonoBehaviour:
   player: 1
   waitSeconds: 1
   moveObjectForTest:
-    ActionType: 0
+    actionTypeType: 0
     EndCell: {x: 100, y: 100, z: 100}
     Round: 1
 --- !u!212 &417580355
@@ -739,6 +739,51 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 4294967295
   m_MaxRayIntersections: 0
+--- !u!1 &581179976
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 581179978}
+  - component: {fileID: 581179977}
+  m_Layer: 0
+  m_Name: UpdateLightSubscriber
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &581179977
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 581179976}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eff2f64ba8a04233b9cd7960ebdd940d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  light2D: {fileID: 1579797938}
+--- !u!4 &581179978
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 581179976}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1.0914865, y: -0.5139126, z: -0.05305414}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &619394800
 GameObject:
   m_ObjectHideFlags: 0
@@ -971,7 +1016,7 @@ MonoBehaviour:
   player: 0
   waitSeconds: 1
   moveObjectForTest:
-    ActionType: 0
+    actionTypeType: 0
     EndCell: {x: 100, y: 100, z: 100}
     Round: 1
 --- !u!1 &1579797937
@@ -1922,3 +1967,4 @@ SceneRoots:
   - {fileID: 757815478}
   - {fileID: 417580356}
   - {fileID: 371092870}
+  - {fileID: 581179978}
