@@ -41,6 +41,7 @@ public class GameJamMultiplayerServiceApplication {
 
     @GetMapping("/clear")
     void clear() {
+log.info("Clearing state");
         stateByRound.clear();
     }
 

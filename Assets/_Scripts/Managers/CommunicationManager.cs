@@ -21,18 +21,26 @@ public class CommunicationManager : MonoBehaviour
 
     private void OnEnable()
     {
-        StateManager.Instance.OnRoundCompleted += NextRound;
+        
     }
 
-    private void OnDisable()
-    {
-        StateManager.Instance.OnRoundCompleted -= NextRound;
-    }
-
-    void NextRound()
+    public void ResetRequests()
     {
         hasChildSentRequest = false;
         hasMonsterSentRequest = false;
+    }
+    public IEnumerator C_ClearServer()
+    {
+        var request =
+            new UnityWebRequest("http://" + Globals.ServerAddress + "/clear", "GET");
+        
+        // Wait for the request to complete
+        yield return request.SendWebRequest();
+
+        if (request.result == UnityWebRequest.Result.Success)
+        {
+            Debug.Log("Successfully cleared");
+        }
     }
 
     public void SubmitChoice(Choice move, PlayerType player, int round)
@@ -43,10 +51,10 @@ public class CommunicationManager : MonoBehaviour
             hasMonsterSentRequest = true;
         else
             return;
-        _startCoroutine = StartCoroutine(Request(move, player, round));
+        _startCoroutine = StartCoroutine(C_Request(move, player, round));
     }
 
-    IEnumerator Request(Choice choice, PlayerType player, int round)
+    IEnumerator C_Request(Choice choice, PlayerType player, int round)
     {
         // Create a new instance of the WebRequest class
         while (true)
@@ -95,8 +103,8 @@ public class CommunicationManager : MonoBehaviour
         communicationsOfThisRound =
             JsonUtility.FromJson<CommunicationData>(downloadHandlerText);
         Debug.Log("Response: " + downloadHandlerText);
-        Debug.Log("Monster: " + round + "/" + communicationsOfThisRound.MonsterChoice?.actionType + "/" + communicationsOfThisRound.MonsterChoice?.PositionsPath + "/" + communicationsOfThisRound.hasChild + "/" + communicationsOfThisRound.hasMonster);
-        Debug.Log("Child: " + round + "/" + communicationsOfThisRound.ChildChoice?.actionType + "/" + communicationsOfThisRound.ChildChoice?.PositionsPath + "/" + communicationsOfThisRound.hasChild + "/" + communicationsOfThisRound.hasMonster);
+        Debug.Log("Monster: " + round + "/" + communicationsOfThisRound.Monster?.actionType + "/" + communicationsOfThisRound.Monster?.PositionsPath + "/" + communicationsOfThisRound.hasChild + "/" + communicationsOfThisRound.hasMonster);
+        Debug.Log("Child: " + round + "/" + communicationsOfThisRound.Child?.actionType + "/" + communicationsOfThisRound.Child?.PositionsPath + "/" + communicationsOfThisRound.hasChild + "/" + communicationsOfThisRound.hasMonster);
 
         return communicationsOfThisRound;
     }

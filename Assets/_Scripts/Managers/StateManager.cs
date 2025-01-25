@@ -16,7 +16,7 @@ public class StateManager : MonoBehaviour
 
     private void Start()
     {
-        ChangeState(new WaitForActionChoiceState());
+        ChangeState(new WaitForInitializationState());
     }
 
     public void ChangeState(State newState)
