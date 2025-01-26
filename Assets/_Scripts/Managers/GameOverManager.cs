@@ -1,9 +1,7 @@
 using UnityEngine;
-using UnityEngine.Events;
 
 public class GameOverManager : MonoBehaviour
 {
-    public UnityEvent OnGameOver;
     public static GameOverManager Instance;
 
     private void Awake()
@@ -15,12 +13,12 @@ public class GameOverManager : MonoBehaviour
     {
         print("Child wins. Monster loses");
         Globals.WinnerType = PlayerType.Monster;
-        OnGameOver?.Invoke();
+        //ChangeScene
     }
     public void ChildWins()
     {
         print("Child wins. Monster loses");
         Globals.WinnerType = PlayerType.Child;
-        OnGameOver?.Invoke();
+        //ChangeScene
     }
 }
