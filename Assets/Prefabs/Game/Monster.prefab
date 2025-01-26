@@ -396,7 +396,6 @@ GameObject:
   m_Component:
   - component: {fileID: 2647651950436359569}
   - component: {fileID: 6624126126438465861}
-  - component: {fileID: 9159371770284963839}
   m_Layer: 0
   m_Name: Monster Light
   m_TagString: Untagged
@@ -471,20 +470,6 @@ MonoBehaviour:
   - {x: 0.5, y: -0.5, z: 0}
   - {x: 0.5, y: 0.5, z: 0}
   - {x: -0.5, y: 0.5, z: 0}
---- !u!114 &9159371770284963839
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6406711997161694656}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: eff2f64ba8a04233b9cd7960ebdd940d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  decreaseAmount: 1
-  minimumRadius: 1.5
 --- !u!1 &6549433969498279364
 GameObject:
   m_ObjectHideFlags: 0
