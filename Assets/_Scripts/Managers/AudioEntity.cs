@@ -15,14 +15,11 @@ public class AudioEntity : MonoBehaviour
     public float distLowToMid;
     public float maxDistMid;
     public float distMidToHigh;
-    
-    private void Start()
-    {
-        StartCoroutine(C_PlayAllSequence());
-    }
 
     void OnEnable()
     {
+        if (audioClipsLow.Length > 0)
+            StartCoroutine(C_PlayAllSequence());
         StateManager.Instance.OnRoundCompleted += UpdateDistance;
     }
 

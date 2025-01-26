@@ -17,6 +17,12 @@ public class Player : MonoBehaviour
         DebugLogConsole.AddCommandInstance("choose", "Choose action", "ChooseAction", this);
     }
 
+    public void ChooseActionWalk() => ChooseAction(EntityActionType.Walk);
+    public void ChooseActionRun() => ChooseAction(EntityActionType.Run);
+    public void ChooseActionWind() => ChooseAction(EntityActionType.CheckWind);
+    public void ChooseActionMove() => ChooseAction(EntityActionType.Move);
+    public void ChooseActionAttack() => ChooseAction(EntityActionType.Attack);
+
     public void ChooseAction(EntityActionType actionType)
     {
         Choice choice = new Choice();

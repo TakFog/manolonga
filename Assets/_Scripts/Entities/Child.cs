@@ -26,6 +26,7 @@ public class Child : Entity
                 yield return StartCoroutine(C_Run(choice.PositionsPath));
                 break;
             case EntityActionType.CheckWind:
+                UIManager.Instance.ShowExitDirection();
                 break;
         }
         IsExecuting = false;

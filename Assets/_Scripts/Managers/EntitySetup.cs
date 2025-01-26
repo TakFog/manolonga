@@ -20,6 +20,7 @@ public class EntitySetup : MonoBehaviour
         child.GetComponentInChildren<Camera>().gameObject.SetActive(enableChild);
         monster.GetComponentInChildren<Camera>().gameObject.SetActive(enableMonster);
         
-        
+        UIManager.Instance.childMoves.SetActive(enableChild);
+        UIManager.Instance.monsterMoves.SetActive(enableMonster);
     }
 }
