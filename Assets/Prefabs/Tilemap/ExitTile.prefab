@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 4686394123998408044}
   - component: {fileID: 7400706389960573578}
   - component: {fileID: 5676361622700766251}
+  - component: {fileID: -3405808764722502144}
   m_Layer: 0
   m_Name: ExitTile
   m_TagString: Untagged
@@ -138,3 +139,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   exitClosed: {fileID: 21300000, guid: fbf79271174699a47804e04fd1ba6371, type: 3}
+--- !u!114 &-3405808764722502144
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8429099962596800195}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 112f369cb1f94805a2d86aecf7d66d1d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  IsWalkableForChild: 1
+  IsWalkableForMonster: 1

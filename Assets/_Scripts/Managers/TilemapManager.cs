@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
@@ -7,7 +8,7 @@ public class TilemapManager : MonoBehaviour
     public static TilemapManager Instance;
     private Tilemap tilemap;
     
-    List<Tile>
+    public Dictionary<Vector3Int, TileGameObject> Tiles = new Dictionary<Vector3Int, TileGameObject>();
     
     private void Awake()
     {
@@ -36,9 +37,14 @@ public class TilemapManager : MonoBehaviour
     }
     public bool IsCellWalkable(Vector3Int cellPosition)
     {
-        
-        return tilemap.HasTile(cellPosition);
-        //TODO: Add support for non walkable tile
+        if (!Tiles.ContainsKey(cellPosition))
+            return false;
+        if (Globals.PlayerType == PlayerType.Child)
+            return Tiles[cellPosition].IsWalkableForChild;
+        else
+        {
+            return Tiles[cellPosition].IsWalkableForMonster;
+        }
     }
 
     public List<CellPath> GetCellPaths(Vector3Int cellPosition, int distance)
