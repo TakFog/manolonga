@@ -3,7 +3,7 @@ using UnityEngine;
 public class Globals
 {
     public static PlayerType WinnerType;
-    public static PlayerType PlayerType;
+    public static PlayerType PlayerType { get; set; }
     public static Child Child;
     public static Monster Monster;
     public static string ServerAddress = "localhost:8080";

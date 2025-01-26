@@ -7,6 +7,6 @@ public class TESTSetGlobalPlayerType : MonoBehaviour
 
     private void Awake()
     {
-        Globals.PlayerType = playerType;
+        //Globals.PlayerType = playerType;
     }
 }

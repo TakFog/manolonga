@@ -32,7 +32,7 @@ public class CommunicationManager : MonoBehaviour
     public IEnumerator C_ClearServer()
     {
         var request =
-            new UnityWebRequest("http://" + Globals.ServerAddress + "/clear", "GET");
+            new UnityWebRequest(Globals.ServerAddress + "/clear", "GET");
         
         // Wait for the request to complete
         yield return request.SendWebRequest();
@@ -89,7 +89,7 @@ public class CommunicationManager : MonoBehaviour
     private UnityWebRequest prepareRequest(Choice choice, PlayerType player, int round)
     {
         var request =
-            new UnityWebRequest("http://" + Globals.ServerAddress + "/updateState/" + player + "/" + round, "POST");
+            new UnityWebRequest(Globals.ServerAddress + "/updateState/" + player + "/" + round, "POST");
         request.uploadHandler = new UploadHandlerRaw(Encoding.UTF8.GetBytes(JsonUtility.ToJson(choice)));
         request.downloadHandler = new DownloadHandlerBuffer();
         request.SetRequestHeader("Content-Type", "application/json");
