@@ -32,8 +32,4 @@ public class StateManager : MonoBehaviour
         Round++;
         OnRoundCompleted?.Invoke();
     }
-    private void Update()
-    {
-        CurrentState?.Update();
-    }
 }
