@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
@@ -6,8 +7,8 @@ public class TilemapManager : MonoBehaviour
 {
     public static TilemapManager Instance;
     private Tilemap tilemap;
-
-    public Dictionary<Vector3Int, TileGameObject> Tiles = new Dictionary<Vector3Int, TileGameObject>(); 
+    
+    public Dictionary<Vector3Int, TileGameObject> Tiles = new Dictionary<Vector3Int, TileGameObject>();
     
     private void Awake()
     {
@@ -38,11 +39,12 @@ public class TilemapManager : MonoBehaviour
     {
         if (!Tiles.ContainsKey(cellPosition))
             return false;
-        var tile = Tiles[cellPosition];
         if (Globals.PlayerType == PlayerType.Child)
-            return tile.IsWalkableForChild;
+            return Tiles[cellPosition].IsWalkableForChild;
         else
-            return tile.IsWalkableForMonster;
+        {
+            return Tiles[cellPosition].IsWalkableForMonster;
+        }
     }
 
     public List<CellPath> GetCellPaths(Vector3Int cellPosition, int distance)
