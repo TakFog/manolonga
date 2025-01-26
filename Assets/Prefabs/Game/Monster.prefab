@@ -204,7 +204,7 @@ Camera:
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 119
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
@@ -793,13 +793,21 @@ MonoBehaviour:
   audioSourceLow: {fileID: 6300130371600947389}
   audioSourceMid: {fileID: 1044057832517308973}
   audioSourceHigh: {fileID: 7034775125482356898}
-  audioClipsLow: []
-  audioClipsMid: []
-  audioClipsHigh: []
+  audioClipsLow:
+  - {fileID: 8300000, guid: 089e00b044f3214409ca4efc1dbbf81d, type: 3}
+  - {fileID: 8300000, guid: 39da41660dda03945a45120c27651159, type: 3}
+  - {fileID: 8300000, guid: 68bbfc9c2296ff1438528de8d6c52cd5, type: 3}
+  audioClipsMid:
+  - {fileID: 8300000, guid: 3d4492ced825d464ab874a8f06785811, type: 3}
+  - {fileID: 8300000, guid: c6b62ec689c4e544da15a63e71d4ef5a, type: 3}
+  - {fileID: 8300000, guid: 931d71dec562b6a4eb24b3818986cf0a, type: 3}
+  audioClipsHigh:
+  - {fileID: 8300000, guid: f3b94205160ea1e4b88e3c31b58031b7, type: 3}
+  - {fileID: 8300000, guid: ddc2ebabaf8695446b1051d0c5e820b2, type: 3}
   maxDistLow: 5
   distLowToMid: 3
   maxDistMid: 2
-  distMidToHigh: 1
+  distMidToHigh: 2
 --- !u!1 &8626658721880021249
 GameObject:
   m_ObjectHideFlags: 0

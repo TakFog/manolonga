@@ -16,7 +16,9 @@ public class AudioEntity : MonoBehaviour
     public float maxDistMid;
     public float distMidToHigh;
 
-    private int index = 0;
+    private int index1 = 0;
+    private int index2 = 0;
+    private int index3 = 0;
     
     void OnEnable()
     {
@@ -45,10 +47,18 @@ public class AudioEntity : MonoBehaviour
     {
         if (audioClipsLow.Length > 1 && !audioSourceLow.isPlaying)
         {
-            audioSourceLow.PlayOneShot(audioClipsLow[index]);
-            audioSourceMid.PlayOneShot(audioClipsMid[index]);
-            audioSourceHigh.PlayOneShot(audioClipsHigh[index]);
-            index = (index + 1) % audioClipsLow.Length;
+            audioSourceLow.PlayOneShot(audioClipsLow[index1]);
+            index1 = (index1 + 1) % audioClipsLow.Length;
+        }
+        if (audioClipsMid.Length > 1 && !audioSourceMid.isPlaying)
+        {
+            audioSourceMid.PlayOneShot(audioClipsMid[index2]);
+            index2 = (index2 + 1) % audioClipsMid.Length;
+        }
+        if (audioClipsHigh.Length > 1 && !audioSourceHigh.isPlaying)
+        {
+            audioSourceHigh.PlayOneShot(audioClipsHigh[index3]);
+            index3 = (index3 + 1) % audioClipsLow.Length;
         }
     }
 

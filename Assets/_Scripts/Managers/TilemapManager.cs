@@ -6,7 +6,7 @@ public class TilemapManager : MonoBehaviour
 {
     public static TilemapManager Instance;
     
-    private Tilemap tilemap;
+    public Tilemap tilemap;
     
     private void Awake()
     {
