@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class Globals
 {
+    public static PlayerType WinnerType;
     public static PlayerType PlayerType;
     public static Child Child;
     public static Monster Monster;

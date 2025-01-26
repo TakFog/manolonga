@@ -104,7 +104,6 @@ MonoBehaviour:
   southeast: {fileID: 3129114011215379228}
   east: {fileID: 6298555594803572372}
   northeast: {fileID: 8607583826407010673}
-  exits: []
 --- !u!95 &4197961089711879579
 Animator:
   serializedVersion: 7
@@ -499,7 +498,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &2564378694140427742
 RectTransform:
   m_ObjectHideFlags: 0

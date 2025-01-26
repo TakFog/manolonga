@@ -51,7 +51,12 @@ public class Child : Entity
     {
         if (other.CompareTag("Exit"))
         {
-            print("Child wins");
+            GameOverManager.Instance.ChildWins();
+        }
+
+        if (other.CompareTag("Monster"))
+        {
+            GameOverManager.Instance.MonsterWins();
         }
     }
 }
