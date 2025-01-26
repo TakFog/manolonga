@@ -13,12 +13,12 @@ public class GameOverManager : MonoBehaviour
     {
         print("Child wins. Monster loses");
         Globals.WinnerType = PlayerType.Monster;
-        //ChangeScene
+        SceneTransitionManager.Instance.ChangeScene("GameOverScene");
     }
     public void ChildWins()
     {
         print("Child wins. Monster loses");
         Globals.WinnerType = PlayerType.Child;
-        //ChangeScene
+        SceneTransitionManager.Instance.ChangeScene("GameOverScene");
     }
 }

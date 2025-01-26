@@ -300,6 +300,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0aa0f349522664bfeabe8ab3589d7958, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  splashScreenImage: {fileID: 1598875083}
+  childWinsSprite: {fileID: -4253404681086389004, guid: 1d2a6face8f956c49ba28e63a2d6784a, type: 3}
+  monsterWinsSprite: {fileID: -2942125624950381887, guid: a2d726c42f8cbc5419e7a96f7e70aa6b, type: 3}
 --- !u!1 &1598875081
 GameObject:
   m_ObjectHideFlags: 0
