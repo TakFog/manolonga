@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 851224092881431120}
   - component: {fileID: 1552632562926172327}
   - component: {fileID: 8693612236440085690}
-  - component: {fileID: 251811374724466912}
+  - component: {fileID: 7356734153775418430}
   m_Layer: 0
   m_Name: MudTile
   m_TagString: Mud
@@ -125,7 +125,7 @@ CircleCollider2D:
   m_CompositeOrder: 0
   m_Offset: {x: 0, y: 0}
   m_Radius: 0.3
---- !u!114 &251811374724466912
+--- !u!114 &7356734153775418430
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -134,7 +134,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 5680580616096599084}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 112f369cb1f94805a2d86aecf7d66d1d, type: 3}
+  m_Script: {fileID: 11500000, guid: b82410bb636e00c40b61c973f81c5eed, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   IsWalkableForChild: 1

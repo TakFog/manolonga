@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 8833373946559967763}
   - component: {fileID: 744312017358939898}
   - component: {fileID: 6733724469513599533}
-  - component: {fileID: 4462946950374750976}
+  - component: {fileID: 6315029120992410740}
   m_Layer: 0
   m_Name: Wall
   m_TagString: Untagged
@@ -124,17 +124,17 @@ MonoBehaviour:
   m_ShadowMesh:
     m_Mesh: {fileID: 0}
     m_LocalBounds:
-      m_Center: {x: 0.008434534, y: -0.034783363, z: 0}
-      m_Extent: {x: 0.4746964, y: 0.38649416, z: 0}
+      m_Center: {x: 0, y: 0, z: 0}
+      m_Extent: {x: 0.5, y: 0.40625, z: 0}
     m_EdgeProcessing: 1
     m_TrimEdge: 0
     m_FlipX: 0
     m_FlipY: 0
-    m_InitialTrim: 0
+    m_InitialTrim: 0.05
   m_CastingOption: 1
-  m_PreviousTrimEdge: 0.05
+  m_PreviousTrimEdge: 0
   m_PreviousEdgeProcessing: 1
-  m_PreviousShadowCastingSource: 1
+  m_PreviousShadowCastingSource: 2
   m_PreviousShadowShape2DSource: {fileID: 744312017358939898}
   references:
     version: 2
@@ -142,7 +142,7 @@ MonoBehaviour:
     - rid: 6599584951600414793
       type: {class: ShadowShape2DProvider_SpriteRenderer, ns: UnityEngine.Rendering.Universal, asm: Unity.RenderPipelines.Universal.2D.Runtime}
       data: 
---- !u!114 &4462946950374750976
+--- !u!114 &6315029120992410740
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -151,7 +151,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 5443644191200009507}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 112f369cb1f94805a2d86aecf7d66d1d, type: 3}
+  m_Script: {fileID: 11500000, guid: b82410bb636e00c40b61c973f81c5eed, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   IsWalkableForChild: 0

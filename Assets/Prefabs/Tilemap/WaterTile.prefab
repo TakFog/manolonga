@@ -97,7 +97,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 4219477530107981421}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 112f369cb1f94805a2d86aecf7d66d1d, type: 3}
+  m_Script: {fileID: 11500000, guid: b82410bb636e00c40b61c973f81c5eed, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   IsWalkableForChild: 0
