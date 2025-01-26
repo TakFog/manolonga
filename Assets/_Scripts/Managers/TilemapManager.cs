@@ -5,8 +5,9 @@ using UnityEngine.Tilemaps;
 public class TilemapManager : MonoBehaviour
 {
     public static TilemapManager Instance;
-    
     private Tilemap tilemap;
+    
+    List<Tile>
     
     private void Awake()
     {
@@ -35,6 +36,7 @@ public class TilemapManager : MonoBehaviour
     }
     public bool IsCellWalkable(Vector3Int cellPosition)
     {
+        
         return tilemap.HasTile(cellPosition);
         //TODO: Add support for non walkable tile
     }
