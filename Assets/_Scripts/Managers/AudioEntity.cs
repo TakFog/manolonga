@@ -16,11 +16,24 @@ public class AudioEntity : MonoBehaviour
     public float maxDistMid;
     public float distMidToHigh;
 
+    private int index = 0;
+    
     void OnEnable()
     {
-        if (audioClipsLow.Length > 0)
-            StartCoroutine(C_PlayAllSequence());
+        if (audioClipsLow.Length == 1)
+        {
+            PlayLoop(audioSourceLow, audioClipsLow[0]);
+            PlayLoop(audioSourceMid, audioClipsMid[0]);
+            PlayLoop(audioSourceHigh, audioClipsHigh[0]);
+        }
         StateManager.Instance.OnRoundCompleted += UpdateDistance;
+    }
+
+    private void PlayLoop(AudioSource audioSource, AudioClip clip)
+    {
+        audioSource.clip = clip;
+        audioSource.loop = true;
+        audioSource.Play();
     }
 
     void OnDisable()
@@ -28,16 +41,15 @@ public class AudioEntity : MonoBehaviour
         StateManager.Instance.OnRoundCompleted -= UpdateDistance;
     }
 
-    IEnumerator C_PlayAllSequence()
+    public void Update()
     {
-        for (int i = 0; i < audioClipsLow.Length; i++)
+        if (audioClipsLow.Length > 1 && !audioSourceLow.isPlaying)
         {
-            audioSourceLow.PlayOneShot(audioClipsLow[i]);
-            audioSourceMid.PlayOneShot(audioClipsMid[i]);
-            audioSourceHigh.PlayOneShot(audioClipsHigh[i]);
-            yield return new WaitForSeconds(audioClipsLow[i].length);
+            audioSourceLow.PlayOneShot(audioClipsLow[index]);
+            audioSourceMid.PlayOneShot(audioClipsMid[index]);
+            audioSourceHigh.PlayOneShot(audioClipsHigh[index]);
+            index = (index + 1) % audioClipsLow.Length;
         }
-        StartCoroutine(C_PlayAllSequence());
     }
 
     public void UpdateDistance()
