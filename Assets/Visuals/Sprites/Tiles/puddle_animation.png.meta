@@ -1,10 +1,16 @@
 fileFormatVersion: 2
-guid: 0570b25150c0da643bdf52f32a787b7c
+guid: abbec703b9f3e6d42aa54d1e04a1352c
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -2135585597343286014
-    second: Hexagon Point Top
+      213: -4060128941952536618
+    second: puddle_animation_0
+  - first:
+      213: 3769927550689137927
+    second: puddle_animation_1
+  - first:
+      213: -4300046584972807108
+    second: puddle_animation_2
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -37,12 +43,12 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 1
+    filterMode: 0
     aniso: 1
     mipBias: 0
-    wrapU: 0
-    wrapV: 0
-    wrapW: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
@@ -51,12 +57,12 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 256
+  spritePixelsToUnits: 32
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
   alphaIsTransparency: 1
-  spriteTessellationDetail: 0
+  spriteTessellationDetail: -1
   textureType: 8
   textureShape: 1
   singleChannelComponent: 0
@@ -68,7 +74,7 @@ TextureImporter:
   ignorePngGamma: 0
   applyGammaDecoding: 0
   swizzle: 50462976
-  cookieLightType: 1
+  cookieLightType: 0
   platformSettings:
   - serializedVersion: 4
     buildTarget: DefaultTexturePlatform
@@ -97,6 +103,19 @@ TextureImporter:
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
     buildTarget: iOS
     maxTextureSize: 2048
     resizeAlgorithm: 0
@@ -111,19 +130,6 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 4
     buildTarget: Android
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 1
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    ignorePlatformSupport: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 4
-    buildTarget: WebGL
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
@@ -165,58 +171,30 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Hexagon Point Top
+      name: button_0
       rect:
         serializedVersion: 2
-        x: 15
-        y: 0
-        width: 226
-        height: 256
+        x: 1
+        y: 1
+        width: 30
+        height: 30
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
-      outline:
-      - - {x: -4, y: 128}
-        - {x: -113, y: 65}
-        - {x: -113, y: -65}
-        - {x: -4, y: -128}
-        - {x: 4, y: -128}
-        - {x: 113, y: -65}
-        - {x: 113, y: 65}
-        - {x: 4, y: 128}
-      physicsShape:
-      - - {x: -111, y: 64}
-        - {x: -111, y: -64}
-        - {x: 0, y: -128}
-        - {x: 111, y: -64}
-        - {x: 111, y: 64}
-        - {x: 0, y: 128}
-      tessellationDetail: 0
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
       bones: []
-      spriteID: 20db9eac630ec52e0800000000000000
-      internalID: -2135585597343286014
+      spriteID: aa90165216f5e1320800000000000000
+      internalID: 2530564911472380330
       vertices: []
       indices: 
       edges: []
       weights: []
-    outline:
-    - - {x: -4, y: 128}
-      - {x: -113, y: 65}
-      - {x: -113, y: -65}
-      - {x: -4, y: -128}
-      - {x: 4, y: -128}
-      - {x: 113, y: -65}
-      - {x: 113, y: 65}
-      - {x: 4, y: 128}
+    outline: []
     customData: 
-    physicsShape:
-    - - {x: -111, y: 64}
-      - {x: -111, y: -64}
-      - {x: 0, y: -128}
-      - {x: 111, y: -64}
-      - {x: 111, y: 64}
-      - {x: 0, y: 128}
+    physicsShape: []
     bones: []
     spriteID: 5e97eb03825dee720800000000000000
     internalID: 0
@@ -228,7 +206,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Hexagon Point Top: -2135585597343286014
+      button_0: 2530564911472380330
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

@@ -49,14 +49,17 @@ public class Child : Entity
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.CompareTag("Exit"))
-        {
-            GameOverManager.Instance.ChildWins();
-        }
-
         if (other.CompareTag("Monster"))
         {
             GameOverManager.Instance.MonsterWins();
+        }
+    }
+
+    private void OnTriggerStay2D(Collider2D other)
+    {
+        if (other.CompareTag("Exit"))
+        {
+            GameOverManager.Instance.ChildWins();
         }
     }
 }
