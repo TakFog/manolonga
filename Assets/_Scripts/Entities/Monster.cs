@@ -82,7 +82,7 @@ public class Monster : Entity
     {
         if (other.CompareTag("Exit"))
         {
-            print("Close Exit");
+            other.GetComponent<Exit>().CloseExit();
         }
     }
 }

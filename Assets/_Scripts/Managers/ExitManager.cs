@@ -32,6 +32,10 @@ public class ExitManager : MonoBehaviour
             (list[i], list[randomIndex]) = (list[randomIndex], list[i]);
         }
     }
-    
-    public void CloseExit(Exit exit) => ClosedExits.Add(exit);
+
+    public void CloseExit(Exit exit)
+    {
+        ClosedExits.Add(exit);
+    } 
+
 }
