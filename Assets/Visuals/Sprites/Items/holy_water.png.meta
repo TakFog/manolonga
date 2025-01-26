@@ -134,7 +134,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      holy_water_0: 4427454291592590300
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

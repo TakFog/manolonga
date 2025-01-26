@@ -1,13 +1,25 @@
 fileFormatVersion: 2
-guid: c7b0e300d8eeae04f8e1d5199ba3b10e
+guid: 80bf58903c931f24bb7db8d61918bf41
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 3336407292611310204
-    second: blue_flame-Sheet_0
+      213: -9140222886614610361
+    second: you_win_label_0
   - first:
-      213: 1805341879901821809
-    second: blue_flame-Sheet_1
+      213: -7883156831099193812
+    second: you_win_label_1
+  - first:
+      213: 4441288143381666865
+    second: you_win_label_2
+  - first:
+      213: -4705716229912389017
+    second: you_win_label_3
+  - first:
+      213: 308218540068112324
+    second: you_win_label_4
+  - first:
+      213: 5895219135749758873
+    second: you_win_label_5
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -103,13 +115,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: blue_flame-Sheet_0
+      name: you_win_label_0
       rect:
         serializedVersion: 2
-        x: 1
+        x: 9
         y: 0
-        width: 15
-        height: 16
+        width: 21
+        height: 22
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -118,20 +130,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: c72be1e61cc4d4e20800000000000000
-      internalID: 3336407292611310204
+      spriteID: 74ec07b26b7672180800000000000000
+      internalID: -9140222886614610361
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: blue_flame-Sheet_1
+      name: you_win_label_1
       rect:
         serializedVersion: 2
-        x: 17
+        x: 34
         y: 0
-        width: 15
-        height: 16
+        width: 24
+        height: 22
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -140,8 +152,96 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 17b1fa9efdcdd0910800000000000000
-      internalID: 1805341879901821809
+      spriteID: c2673adf0a6699290800000000000000
+      internalID: -7883156831099193812
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: you_win_label_2
+      rect:
+        serializedVersion: 2
+        x: 61
+        y: 0
+        width: 24
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 13c1b631900a2ad30800000000000000
+      internalID: 4441288143381666865
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: you_win_label_3
+      rect:
+        serializedVersion: 2
+        x: 114
+        y: 0
+        width: 24
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 76a18465500f1beb0800000000000000
+      internalID: -4705716229912389017
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: you_win_label_4
+      rect:
+        serializedVersion: 2
+        x: 141
+        y: 0
+        width: 21
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4c703f11123074400800000000000000
+      internalID: 308218540068112324
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: you_win_label_5
+      rect:
+        serializedVersion: 2
+        x: 167
+        y: 0
+        width: 24
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 99f137bd19600d150800000000000000
+      internalID: 5895219135749758873
       vertices: []
       indices: 
       edges: []
@@ -159,9 +259,7 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable:
-      blue_flame-Sheet_0: 3336407292611310204
-      blue_flame-Sheet_1: 1805341879901821809
+    nameFileIdTable: {}
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

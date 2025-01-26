@@ -134,7 +134,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      cornetto_0: -136624580110290636
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
