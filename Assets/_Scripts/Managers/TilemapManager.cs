@@ -5,8 +5,9 @@ using UnityEngine.Tilemaps;
 public class TilemapManager : MonoBehaviour
 {
     public static TilemapManager Instance;
-    
     private Tilemap tilemap;
+
+    public Dictionary<Vector3Int, TileGameObject> Tiles = new Dictionary<Vector3Int, TileGameObject>(); 
     
     private void Awake()
     {
@@ -35,8 +36,13 @@ public class TilemapManager : MonoBehaviour
     }
     public bool IsCellWalkable(Vector3Int cellPosition)
     {
-        return tilemap.HasTile(cellPosition);
-        //TODO: Add support for non walkable tile
+        if (!Tiles.ContainsKey(cellPosition))
+            return false;
+        var tile = Tiles[cellPosition];
+        if (Globals.PlayerType == PlayerType.Child)
+            return tile.IsWalkableForChild;
+        else
+            return tile.IsWalkableForMonster;
     }
 
     public List<CellPath> GetCellPaths(Vector3Int cellPosition, int distance)
