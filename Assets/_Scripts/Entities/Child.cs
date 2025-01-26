@@ -26,6 +26,7 @@ public class Child : Entity
                 yield return StartCoroutine(C_Run(choice.PositionsPath));
                 break;
             case EntityActionType.CheckWind:
+                UIManager.Instance.ShowExitDirection();
                 break;
         }
         IsExecuting = false;
@@ -45,5 +46,17 @@ public class Child : Entity
             yield return transform.DOMove(positionsPath[i], MovementAnimationDuration/positionsPath.Count).SetEase(MovementAnimationEase).WaitForCompletion();
         }
     }
-    
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.CompareTag("Exit"))
+        {
+            GameOverManager.Instance.ChildWins();
+        }
+
+        if (other.CompareTag("Monster"))
+        {
+            GameOverManager.Instance.MonsterWins();
+        }
+    }
 }

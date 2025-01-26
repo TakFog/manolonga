@@ -3,7 +3,11 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 3
-  tags: []
+  tags:
+  - Exit
+  - Hand
+  - Child
+  - Monster
   layers:
   - Default
   - TransparentFX
@@ -38,8 +42,20 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: Ground
+    uniqueID: 2060167603
+    locked: 0
+  - name: Collectables
+    uniqueID: 1056090817
+    locked: 0
+  - name: Highlight
+    uniqueID: 1689037969
+    locked: 0
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Entity
+    uniqueID: 4072041053
     locked: 0
   m_RenderingLayers:
   - Default
