@@ -1,11 +1,19 @@
+using System;
 using UnityEngine;
 using UnityEngine.Rendering.Universal;
 
 public class UpdateLight : MonoBehaviour
 {
-    public Light2D light2D;
-    public float decreaseAmount = 1f;
-    public float defaultRadius = 2.5f;
+    Light2D light2D;
+    [SerializeField] float decreaseAmount = 0.5f;
+    [SerializeField] float minimumRadius = 1.5f;
+    float defaultRadius;
+
+    private void Awake()
+    {
+        light2D = GetComponent<Light2D>();
+        defaultRadius = light2D.pointLightOuterRadius;
+    }
 
     private void OnEnable()
     {
@@ -33,24 +41,13 @@ public class UpdateLight : MonoBehaviour
     {
         if (light2D != null)
         {
-            if (light2D.pointLightOuterRadius + points < 0)
-            {
-                Debug.LogError("Outer Radius cannot be less than 0!");
+            if (light2D.pointLightOuterRadius + points < minimumRadius)
                 return;
-            }
-            if (light2D.pointLightOuterRadius + points > 3)
-            {
-                Debug.LogError("Outer Radius cannot be more than 3!");
-                return;
-            }
             
+
             light2D.pointLightOuterRadius += points;
 
             Debug.Log("Updated Outer Radius: " + light2D.pointLightOuterRadius);
-        }
-        else
-        {
-            Debug.LogError("Light2D component not found on GameObject!");
         }
     }
 }

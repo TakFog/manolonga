@@ -13,7 +13,7 @@ public class WaitForExecutionState : State
     public override void Enter()
     {
         base.Enter();
-        // StateManager.Instance.StartCoroutine(C_Execute());
+        StateManager.Instance.StartCoroutine(C_Execute());
     }
 
 
