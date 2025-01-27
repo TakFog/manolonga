@@ -412,7 +412,7 @@ MonoBehaviour:
   MovementAnimationDuration: 1
   MovementAnimationEase: 1
   WalkDistance: 1
-  RunDistance: 3
+  RunDistance: 2
 --- !u!58 &709855933518333675
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -535,6 +535,22 @@ PrefabInstance:
     - target: {fileID: 6827861625377465626, guid: d28a32c5b93f5844aa102068b12ef27c, type: 3}
       propertyPath: m_Enabled
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6827861625377465626, guid: d28a32c5b93f5844aa102068b12ef27c, type: 3}
+      propertyPath: maxDistLow
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 6827861625377465626, guid: d28a32c5b93f5844aa102068b12ef27c, type: 3}
+      propertyPath: maxDistMid
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6827861625377465626, guid: d28a32c5b93f5844aa102068b12ef27c, type: 3}
+      propertyPath: distLowToMid
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 6827861625377465626, guid: d28a32c5b93f5844aa102068b12ef27c, type: 3}
+      propertyPath: distMidToHigh
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 6827861625377465626, guid: d28a32c5b93f5844aa102068b12ef27c, type: 3}
       propertyPath: audioClipsLow.Array.size
