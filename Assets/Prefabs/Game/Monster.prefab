@@ -316,9 +316,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 45f39bcd431242a099c48c3c873f07ea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MovementAnimationDuration: 2
+  MovementAnimationDuration: 3
   MovementAnimationEase: 1
-  MoveDistance: 2
+  MoveDistance: 4
   AttackDistance: 3
   hand: {fileID: 3299014190671594128, guid: 2d1573d2ce48df34c97c554bd81f1da0, type: 3}
   AttackAnimationDuration: 1
@@ -779,20 +779,15 @@ MonoBehaviour:
   audioSourceMid: {fileID: 1044057832517308973}
   audioSourceHigh: {fileID: 7034775125482356898}
   audioClipsLow:
-  - {fileID: 8300000, guid: 089e00b044f3214409ca4efc1dbbf81d, type: 3}
-  - {fileID: 8300000, guid: 39da41660dda03945a45120c27651159, type: 3}
   - {fileID: 8300000, guid: 68bbfc9c2296ff1438528de8d6c52cd5, type: 3}
   audioClipsMid:
-  - {fileID: 8300000, guid: 3d4492ced825d464ab874a8f06785811, type: 3}
-  - {fileID: 8300000, guid: c6b62ec689c4e544da15a63e71d4ef5a, type: 3}
   - {fileID: 8300000, guid: 931d71dec562b6a4eb24b3818986cf0a, type: 3}
   audioClipsHigh:
-  - {fileID: 8300000, guid: f3b94205160ea1e4b88e3c31b58031b7, type: 3}
   - {fileID: 8300000, guid: ddc2ebabaf8695446b1051d0c5e820b2, type: 3}
-  maxDistLow: 5
-  distLowToMid: 3
-  maxDistMid: 2
-  distMidToHigh: 2
+  maxDistLow: 6
+  distLowToMid: 5
+  maxDistMid: 4
+  distMidToHigh: 4
 --- !u!1 &8626658721880021249
 GameObject:
   m_ObjectHideFlags: 0
