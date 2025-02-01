@@ -316,7 +316,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 45f39bcd431242a099c48c3c873f07ea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MovementAnimationDuration: 3
+  MovementAnimationDuration: 2
   MovementAnimationEase: 1
   MoveDistance: 4
   AttackDistance: 3
