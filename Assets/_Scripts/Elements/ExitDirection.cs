@@ -16,6 +16,7 @@ public class ExitDirection : MonoBehaviour
     
     public void ShowExitDirection()
     {
+        Debug.Log("looking for exit over "+ ExitManager.Instance.OpenedExits.Count);
         var playerPos = Globals.Player.transform.position;
         Vector3 minpos = playerPos;
         float minsqrt = float.MaxValue;
@@ -28,7 +29,9 @@ public class ExitDirection : MonoBehaviour
                 minsqrt = sqrt;
             }
         }
+        Debug.Log("exit at " + minpos);
         var dir = DiscreteDirection.GetOctagonDirection(playerPos, minpos);
+        Debug.Log("dir " + dir);
         
         north.SetActive(false);
         northwest.SetActive(false);
@@ -57,16 +60,14 @@ public class ExitDirection : MonoBehaviour
                 northwest.SetActive(true);
                 break;
             case Cardinal.NorthWest:
-                northwest.SetActive(false);
+                northwest.SetActive(true);
                 break;
             case Cardinal.SouthEast:
-                southeast.SetActive(false);
+                southeast.SetActive(true);
                 break;
             case Cardinal.SouthWest:
-                southwest.SetActive(false);
+                southwest.SetActive(true);
                 break;
         }
-        
-        gameObject.SetActive(true);
     }
 }

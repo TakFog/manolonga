@@ -8,7 +8,7 @@ public class ExitManager : MonoBehaviour
     [SerializeField] int numberOfUsedExits;
     public List<Exit> ActiveExits = new List<Exit>(); 
     public List<Exit> ClosedExits = new List<Exit>();
-    public List<Exit> OpenedExits => ActiveExits.Intersect(ClosedExits).ToList();
+    public List<Exit> OpenedExits => ActiveExits.Except(ClosedExits).ToList();
     
     private void Awake()
     {

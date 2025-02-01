@@ -43,7 +43,9 @@ public class UIManager : MonoBehaviour
 
     public void ShowExitDirection()
     {
+        Debug.Log("check wind");
         directionThisTurn = true;
+        exitDirection.gameObject.SetActive(true);
         exitDirection.ShowExitDirection();
     }
 }

@@ -17,6 +17,7 @@ public class Child : Entity
     public override IEnumerator C_ExecuteChoice(Choice choice)
     {
         IsExecuting = true;
+        Debug.Log("child " + choice.actionType);
         switch (choice.actionType)
         {
             case EntityActionType.Walk:
