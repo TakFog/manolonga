@@ -70,12 +70,12 @@ public class DiscreteDirection
 
     public static bool IsLeft(Vector2 direction)
     {
-        return direction.x > 0;
+        return direction.x < 0;
     }
 
     public static bool IsRight(Vector2 direction)
     {
-        return direction.x < 0;
+        return direction.x > 0;
     }
 
     // Given source and destination, returns the direction on the unit hexagon

@@ -8,6 +8,8 @@ public class TestDirection : MonoBehaviour
     
     public bool hexagon;
 
+    public Cardinal cardinal;
+
     // Update is called once per frame
     void Update()
     {
@@ -19,5 +21,6 @@ public class TestDirection : MonoBehaviour
             dir = DiscreteDirection.GetOctagonDirection(source.transform.position, 
                 destination.transform.position);
         direction.transform.position = source.transform.position + (Vector3)dir;
+        cardinal = DiscreteDirection.ToCardinal(dir);
     }
 }
