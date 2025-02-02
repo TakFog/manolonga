@@ -15,7 +15,7 @@ public class EntitySetup : MonoBehaviour
         bool enableMonster = Globals.PlayerType == PlayerType.Monster;
         
         child.GetComponentInChildren<AudioEntity>().enabled = enableChild;
-        monster.GetComponentInChildren<AudioEntity>().enabled = enableMonster;
+        monster.GetComponentInChildren<AudioSeqEntity>().enabled = enableMonster;
 
         child.GetComponentInChildren<Camera>().gameObject.SetActive(enableChild);
         monster.GetComponentInChildren<Camera>().gameObject.SetActive(enableMonster);

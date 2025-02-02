@@ -1,9 +1,12 @@
+using DG.Tweening;
 using System.Collections;
 using UnityEngine;
 
 public class AudioSeqEntity : MonoBehaviour
 {
     public AudioSource audioSource;
+
+    public float fadeTime;
     
     public AudioClip[] audioClipsLow;
     public AudioClip[] audioClipsMid;
@@ -15,9 +18,24 @@ public class AudioSeqEntity : MonoBehaviour
     private int dist = 2;
     private int index = 0;
 
+    void OnEnable()
+    {
+        StateManager.Instance.OnRoundCompleted += UpdateDistance;
+    }
+
+    void OnDisable()
+    {
+        StateManager.Instance.OnRoundCompleted -= UpdateDistance;
+    }
+
     public void Update()
     {
         if (audioSource.isPlaying) return;
+        ChangeClip();
+    }
+
+    private void ChangeClip() 
+    { 
         int actDist = GetDistance();
         if (dist == actDist)
             index++;
@@ -40,7 +58,8 @@ public class AudioSeqEntity : MonoBehaviour
         }
         index = index % clips.Length;
         Debug.Log("index " + index + " dist " + dist);
-        audioSource.PlayOneShot(clips[index]);
+        audioSource.clip = clips[index];
+        audioSource.Play();
     }
 
     public int GetDistance()
@@ -56,4 +75,18 @@ public class AudioSeqEntity : MonoBehaviour
             return 0;
     }
 
+    [ContextMenu("Update")]
+    public void UpdateDistance()
+    {
+        int actDist = GetDistance();
+        if (dist != actDist)
+            StartCoroutine(C_ChangeClip());
+    }
+
+    IEnumerator C_ChangeClip()
+    {
+        yield return audioSource.DOFade(0, fadeTime).WaitForCompletion();
+        audioSource.volume = 1f;
+        ChangeClip();
+    }
 }
