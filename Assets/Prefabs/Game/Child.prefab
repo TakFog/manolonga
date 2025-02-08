@@ -409,10 +409,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 635365cd28ded9142bcb6cf23829f408, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  facingRight: 0
   MovementAnimationDuration: 2
   MovementAnimationEase: 1
   WalkDistance: 1
   RunDistance: 2
+  animator: {fileID: 3997163600557771368}
 --- !u!58 &709855933518333675
 CircleCollider2D:
   m_ObjectHideFlags: 0

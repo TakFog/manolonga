@@ -8,3 +8,9 @@ public class CommunicationData
     public bool hasMonster;
     public bool hasChild;
 }
+
+[System.Serializable]
+public class InitData
+{
+    public string gameid;
+}

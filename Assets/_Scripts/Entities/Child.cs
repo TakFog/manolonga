@@ -8,6 +8,7 @@ public class Child : Entity
 {
     [Range(1, 5)] public int WalkDistance;
     [Range(1, 5)] public int RunDistance;
+    public Animator animator;
 
     private void Awake()
     {
@@ -27,7 +28,8 @@ public class Child : Entity
                 yield return StartCoroutine(C_Run(choice.PositionsPath));
                 break;
             case EntityActionType.CheckWind:
-                UIManager.Instance.ShowExitDirection();
+                if (Globals.PlayerType == PlayerType.Child)
+                    UIManager.Instance.ShowExitDirection();
                 break;
         }
         IsExecuting = false;
@@ -42,10 +44,13 @@ public class Child : Entity
     }
     public IEnumerator C_Run(List<Vector3> positionsPath)
     {
+        animator.SetBool("run", true);
         for (int i = 0; i < positionsPath.Count; i++)
         {
+            FaceDirection(positionsPath[i]);
             yield return transform.DOMove(positionsPath[i], MovementAnimationDuration/positionsPath.Count).SetEase(MovementAnimationEase).WaitForCompletion();
         }
+        animator.SetBool("run", false);
     }
 
     private void OnTriggerEnter2D(Collider2D other)
@@ -61,6 +66,10 @@ public class Child : Entity
         if (other.CompareTag("Exit"))
         {
             GameOverManager.Instance.ChildWins();
+        }
+        if (other.CompareTag("Monster") || other.CompareTag("Hand"))
+        {
+            GameOverManager.Instance.MonsterWins();
         }
     }
 }

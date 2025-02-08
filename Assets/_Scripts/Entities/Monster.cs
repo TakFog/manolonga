@@ -45,12 +45,13 @@ public class Monster : Entity
 
     private IEnumerator C_Move(List<Vector3> positionsPath)
     {
-        animator.SetBool("Move", true);
+        animator.SetBool("Walk", true);
         for (int i = 0; i < positionsPath.Count; i++)
         {
+            FaceDirection(positionsPath[i]);
             yield return transform.DOMove(positionsPath[i], MovementAnimationDuration/positionsPath.Count).SetEase(MovementAnimationEase).WaitForCompletion();
         }
-        animator.SetBool("Move", false);
+        animator.SetBool("Walk", false);
     }
     private IEnumerator C_Attack(List<Vector3> positionsPath)
     {
@@ -70,7 +71,7 @@ public class Monster : Entity
             instantiatedHands.Reverse();
             foreach (var iHand in instantiatedHands)
             {
-                iHand.GetComponent<Animator>().SetFloat("SpeedSign", -1);
+                iHand.GetComponentInChildren<Animator>().SetFloat("SpeedSign", -1);
                 Destroy(iHand);
                 yield return new WaitForSeconds(HandAnimationDuration);
             }

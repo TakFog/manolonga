@@ -11,14 +11,18 @@ public class GameOverManager : MonoBehaviour
 
     public void MonsterWins()
     {
-        print("Child wins. Monster loses");
+        if (Globals.HasWinner) return;
+        print("Child loses. Monster wins");
         Globals.WinnerType = PlayerType.Monster;
+        Globals.HasWinner = true;
         SceneTransitionManager.Instance.ChangeScene("GameOverScene");
     }
     public void ChildWins()
     {
+        if (Globals.HasWinner) return;
         print("Child wins. Monster loses");
         Globals.WinnerType = PlayerType.Child;
+        Globals.HasWinner = true;
         SceneTransitionManager.Instance.ChangeScene("GameOverScene");
     }
 }

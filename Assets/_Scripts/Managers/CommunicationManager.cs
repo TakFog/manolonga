@@ -7,6 +7,7 @@ using UnityEngine.Networking;
 public class CommunicationManager : MonoBehaviour
 {
     public event Action<CommunicationData> OnMovesReceived;
+    public event Action<string> OnGameIdReceived;
 
     public float waitSeconds = 1f;
     private Coroutine _startCoroutine;
@@ -29,6 +30,25 @@ public class CommunicationManager : MonoBehaviour
         hasChildSentRequest = false;
         hasMonsterSentRequest = false;
     }
+
+    public IEnumerator C_RequestGameId()
+    {
+        if (Globals.DefaultServerAddress == null) yield break;
+        var request = new UnityWebRequest(Globals.DefaultServerAddress + "/createGame", "GET");
+        request.downloadHandler = new DownloadHandlerBuffer();
+
+        // Wait for the request to complete
+        yield return request.SendWebRequest();
+
+        if (request.result == UnityWebRequest.Result.Success)
+        {
+            InitData initData = JsonUtility.FromJson<InitData>(request.downloadHandler.text);
+            Debug.Log("Game ID: "+initData.gameid);
+            OnGameIdReceived?.Invoke(initData.gameid);
+        }
+    }
+
+
     public IEnumerator C_ClearServer()
     {
         var request =

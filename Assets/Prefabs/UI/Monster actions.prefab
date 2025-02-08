@@ -123,7 +123,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2396516982712722422, guid: 5da81f32e56071b44b01b3f0aabee538, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2396516982712722422, guid: 5da81f32e56071b44b01b3f0aabee538, type: 3}
       propertyPath: m_AnchorMin.x
@@ -131,15 +131,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2396516982712722422, guid: 5da81f32e56071b44b01b3f0aabee538, type: 3}
       propertyPath: m_AnchorMin.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2396516982712722422, guid: 5da81f32e56071b44b01b3f0aabee538, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 905
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2396516982712722422, guid: 5da81f32e56071b44b01b3f0aabee538, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 30
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2396516982712722422, guid: 5da81f32e56071b44b01b3f0aabee538, type: 3}
       propertyPath: m_LocalPosition.x
@@ -171,11 +171,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2396516982712722422, guid: 5da81f32e56071b44b01b3f0aabee538, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 1437.5
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2396516982712722422, guid: 5da81f32e56071b44b01b3f0aabee538, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -45
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2396516982712722422, guid: 5da81f32e56071b44b01b3f0aabee538, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -211,11 +211,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6508915652100719220, guid: 5da81f32e56071b44b01b3f0aabee538, type: 3}
       propertyPath: m_Name
-      value: Run
+      value: Attack
       objectReference: {fileID: 0}
     - target: {fileID: 6508915652100719220, guid: 5da81f32e56071b44b01b3f0aabee538, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -369,7 +369,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6508915652100719220, guid: 5da81f32e56071b44b01b3f0aabee538, type: 3}
       propertyPath: m_Name
-      value: Walk
+      value: Move
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
