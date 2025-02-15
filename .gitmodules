@@ -1,0 +1,4 @@
+[submodule "manolonga-server"]
+	path = manolonga-server
+	url = https://github.com/TakFog/manolonga-server.git
+	branch = main
