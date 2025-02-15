@@ -4,6 +4,9 @@ using UnityEngine.UI;
 public class Choose : MonoBehaviour
 {
     public Image splashScreenImage;
+    public GameObject winImage;
+    public GameObject loseImage;
+
     public Sprite childWinsSprite;
     public Sprite monsterWinsSprite;
 
@@ -16,5 +19,8 @@ public class Choose : MonoBehaviour
         }
 
         splashScreenImage.overrideSprite = Globals.WinnerType == PlayerType.Child ? childWinsSprite : monsterWinsSprite;
+        bool winner = Globals.PlayerType == Globals.WinnerType;
+        winImage.SetActive(winner);
+        loseImage.SetActive(!winner);
     }
 }
