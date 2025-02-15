@@ -8,6 +8,8 @@ public class ChangeServer : MonoBehaviour
     
     public void ChangeServerAddress(string serverAddress)
     {
+        if (Globals.DefaultServerAddress != null && !serverAddress.Contains("."))
+            serverAddress = Globals.DefaultServerAddress + "/" + serverAddress.ToUpper();
         Debug.Log("Changing server address to: " + serverAddress);
         Globals.ServerAddress = serverAddress;
     }
@@ -30,8 +32,15 @@ public class ChangeServer : MonoBehaviour
 
     IEnumerator C_InitGameServer()
     {
-        if (CommunicationManager.Instance != null) InitGameServer();
-        else yield return null;
+        while (true)
+        {
+            if (CommunicationManager.Instance != null)
+            {
+                InitGameServer();
+                break;
+            }
+            else yield return null;
+        }
     }
 
     private void InitGameServer()
@@ -53,7 +62,7 @@ public class ChangeServer : MonoBehaviour
         if (serverAddressInputField.text == "")
         {
             Globals.ServerAddress = Globals.DefaultServerAddress + "/" + gameId;
-            serverAddressInputField.text = Globals.ServerAddress;
+            serverAddressInputField.text = gameId;
         }
     }
 }

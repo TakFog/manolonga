@@ -9,6 +9,7 @@ public class UIManager : MonoBehaviour
     public GameObject monsterMoves;
 
     public ExitDirection exitDirection;
+    public GameObject waitPanel;
     
     private bool directionThisTurn = false;
     
@@ -47,5 +48,10 @@ public class UIManager : MonoBehaviour
         directionThisTurn = true;
         exitDirection.gameObject.SetActive(true);
         exitDirection.ShowExitDirection();
+    }
+
+    public void SetWaitEnabled(bool enabled)
+    {
+        waitPanel.SetActive(enabled);
     }
 }

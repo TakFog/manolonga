@@ -38,4 +38,14 @@ public class ExitManager : MonoBehaviour
         ClosedExits.Add(exit);
     } 
 
+    public bool IsOpen(Exit exit)
+    {
+        return !ClosedExits.Contains(exit);
+    }
+
+    public bool AreAllClosed()
+    {
+        return ClosedExits.Count >= ActiveExits.Count;
+    }
+
 }

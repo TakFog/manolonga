@@ -84,6 +84,8 @@ public class Monster : Entity
         if (other.CompareTag("Exit"))
         {
             other.GetComponent<Exit>().CloseExit();
+            if (ExitManager.Instance.AreAllClosed())
+                GameOverManager.Instance.MonsterWins();
         }
     }
 }

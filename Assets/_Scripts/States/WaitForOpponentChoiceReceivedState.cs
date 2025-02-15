@@ -3,6 +3,7 @@
     public override void Enter()
     {
         base.Enter();
+        UIManager.Instance.SetWaitEnabled(true);
         CommunicationManager.Instance.OnMovesReceived += MovesReceived;
     }
     void MovesReceived(CommunicationData communicationOfThisRound)
@@ -12,6 +13,7 @@
     public override void Exit()
     {
         base.Exit();
+        UIManager.Instance.SetWaitEnabled(false);
         CommunicationManager.Instance.OnMovesReceived -= MovesReceived;
     }
 }

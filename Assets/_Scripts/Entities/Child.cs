@@ -63,7 +63,7 @@ public class Child : Entity
 
     private void OnTriggerStay2D(Collider2D other)
     {
-        if (other.CompareTag("Exit"))
+        if (other.CompareTag("Exit") && ExitManager.Instance.IsOpen(other.GetComponent<Exit>()))
         {
             GameOverManager.Instance.ChildWins();
         }
