@@ -17,7 +17,14 @@ public class ChangeServer : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     private void Awake()
     {
-        serverAddressInputField.text = Globals.ServerAddress;
+        if (Globals.DefaultServerAddress != null && Globals.ServerAddress.StartsWith(Globals.DefaultServerAddress+"/"))
+        {
+            serverAddressInputField.text = Globals.ServerAddress.Substring(Globals.DefaultServerAddress.Length + 1);
+        }
+        else
+        {
+            serverAddressInputField.text = Globals.ServerAddress;
+        }
         serverAddressInputField.onValueChanged.AddListener(ChangeServerAddress);
     }
 

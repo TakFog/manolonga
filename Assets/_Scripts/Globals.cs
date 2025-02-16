@@ -12,7 +12,7 @@ public class Globals
     public static string DefaultServerAddress = "http://localhost:8080";
     public static string ServerAddress = DefaultServerAddress + "/DEBUG";
 #else
-    public static string DefaultServerAddress = "https://manolonga.vercel.app/";
+    public static string DefaultServerAddress = "https://manolonga.vercel.app";
     public static string ServerAddress = "";
 #endif
 
