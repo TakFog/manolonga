@@ -35,6 +35,12 @@ public class TilemapManager : MonoBehaviour
     {
         return tilemap.WorldToCell(worldPosition);
     }
+
+    public Vector3 AlignToCell(Vector3 worldPosition)
+    {
+        return GetCellWorldCenterPosition(GetCellAtWorldPosition(worldPosition));
+    }
+
     public bool IsCellWalkable(Vector3Int cellPosition)
     {
         if (!Tiles.ContainsKey(cellPosition))

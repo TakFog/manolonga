@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-public class ExitManager : MonoBehaviour
+public class ExitManager : MyBehaviour
 {
     public static ExitManager Instance { get; private set; }
     public int numberOfUsedExits;
@@ -24,7 +24,7 @@ public class ExitManager : MonoBehaviour
         //}
     }
 
-    private void OnEnable()
+    protected override void OnEnableAfterStart()
     {
         CommunicationManager.Instance.OnOpenedExitsReceived += InitExits;
     }

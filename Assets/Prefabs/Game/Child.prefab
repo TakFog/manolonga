@@ -97,7 +97,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eff2f64ba8a04233b9cd7960ebdd940d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  decreaseAmount: 0.5
+  decreaseAmount: 0.1
   minimumRadius: 1.5
 --- !u!1 &6659324568489192695
 GameObject:

@@ -82,7 +82,7 @@ public class CommunicationManager : MonoBehaviour
             Debug.Log("Init received");
             var downloadHandlerText = request.downloadHandler.text;
             InitOutputData output = JsonUtility.FromJson<InitOutputData>(downloadHandlerText);
-            Debug.Log("Init: " + output.ToString());
+            Debug.Log("Init: " + downloadHandlerText);
             OnOpenedExitsReceived?.Invoke(output.openExits);
             OnMonsterSpawnReceived?.Invoke(output.monsterSpawn);
             OnChildSpawnReceived?.Invoke(output.childSpawn);
