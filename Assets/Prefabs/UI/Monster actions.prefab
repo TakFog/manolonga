@@ -191,7 +191,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4178418104728947841, guid: 5da81f32e56071b44b01b3f0aabee538, type: 3}
       propertyPath: m_text
-      value: Attack
+      value: Attack (2)
       objectReference: {fileID: 0}
     - target: {fileID: 4178418104728947841, guid: 5da81f32e56071b44b01b3f0aabee538, type: 3}
       propertyPath: m_fontSize
@@ -345,7 +345,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4178418104728947841, guid: 5da81f32e56071b44b01b3f0aabee538, type: 3}
       propertyPath: m_text
-      value: Move
+      value: Move (4)
       objectReference: {fileID: 0}
     - target: {fileID: 4178418104728947841, guid: 5da81f32e56071b44b01b3f0aabee538, type: 3}
       propertyPath: m_fontSize

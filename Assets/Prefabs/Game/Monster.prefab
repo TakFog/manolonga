@@ -71,7 +71,7 @@ Camera:
   far clip plane: 1000
   field of view: 34
   orthographic: 1
-  orthographic size: 2.5
+  orthographic size: 2.9
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -191,7 +191,7 @@ MonoBehaviour:
   MovementAnimationDuration: 2
   MovementAnimationEase: 1
   MoveDistance: 4
-  AttackDistance: 3
+  AttackDistance: 2
   hand: {fileID: 3299014190671594128, guid: 2d1573d2ce48df34c97c554bd81f1da0, type: 3}
   AttackAnimationDuration: 1
   HandAnimationDuration: 1
@@ -319,10 +319,10 @@ MonoBehaviour:
   m_NormalMapDistance: 3
   m_NormalMapQuality: 2
   m_UseNormalMap: 0
-  m_ShadowsEnabled: 0
-  m_ShadowIntensity: 0.69
-  m_ShadowSoftness: 0
-  m_ShadowSoftnessFalloffIntensity: 0.61
+  m_ShadowsEnabled: 1
+  m_ShadowIntensity: 1
+  m_ShadowSoftness: 1
+  m_ShadowSoftnessFalloffIntensity: 1
   m_ShadowVolumeIntensityEnabled: 1
   m_ShadowVolumeIntensity: 0.86
   m_LocalBounds:
@@ -331,7 +331,7 @@ MonoBehaviour:
   m_PointLightInnerAngle: 359.99997
   m_PointLightOuterAngle: 359.99997
   m_PointLightInnerRadius: 0
-  m_PointLightOuterRadius: 4.5
+  m_PointLightOuterRadius: 5
   m_ShapeLightParametricSides: 5
   m_ShapeLightParametricAngleOffset: 0
   m_ShapeLightParametricRadius: 1
