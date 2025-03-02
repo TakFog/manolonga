@@ -1,5 +1,4 @@
-﻿using UnityEngine.Serialization;
-
+﻿
 [System.Serializable]
 public class CommunicationData
 {
@@ -10,7 +9,26 @@ public class CommunicationData
 }
 
 [System.Serializable]
-public class InitData
+public class CreateGameData
 {
     public string gameid;
 }
+
+[System.Serializable]
+public class InitInputData
+{
+    public int numExits;
+    public int numOpenExits;
+    public int numMonsterSpawns;
+    public int numChildSpawns;
+}
+
+
+[System.Serializable]
+public class InitOutputData
+{
+    public int[] openExits;
+    public int monsterSpawn;
+    public int childSpawn;
+}
+

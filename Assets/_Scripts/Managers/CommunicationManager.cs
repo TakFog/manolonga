@@ -8,6 +8,9 @@ public class CommunicationManager : MonoBehaviour
 {
     public event Action<CommunicationData> OnMovesReceived;
     public event Action<string> OnGameIdReceived;
+    public event Action<int[]> OnOpenedExitsReceived;
+    public event Action<int> OnMonsterSpawnReceived;
+    public event Action<int> OnChildSpawnReceived;
 
     public float waitSeconds = 1f;
     private Coroutine _startCoroutine;
@@ -42,7 +45,7 @@ public class CommunicationManager : MonoBehaviour
 
         if (request.result == UnityWebRequest.Result.Success)
         {
-            InitData initData = JsonUtility.FromJson<InitData>(request.downloadHandler.text);
+            CreateGameData initData = JsonUtility.FromJson<CreateGameData>(request.downloadHandler.text);
             Debug.Log("Game ID: "+initData.gameid);
             OnGameIdReceived?.Invoke(initData.gameid);
         }
@@ -53,13 +56,36 @@ public class CommunicationManager : MonoBehaviour
     {
         var request =
             new UnityWebRequest(Globals.ServerAddress + "/clear", "GET");
-        
+
         // Wait for the request to complete
         yield return request.SendWebRequest();
 
         if (request.result == UnityWebRequest.Result.Success)
         {
             Debug.Log("Successfully cleared");
+        }
+    }
+
+    public IEnumerator C_InitGame(InitInputData input)
+    {
+        var request =
+            new UnityWebRequest(Globals.ServerAddress + "/init", "POST");
+        request.uploadHandler = new UploadHandlerRaw(Encoding.UTF8.GetBytes(JsonUtility.ToJson(input)));
+        request.downloadHandler = new DownloadHandlerBuffer();
+        request.SetRequestHeader("Content-Type", "application/json");
+
+        // Wait for the request to complete
+        yield return request.SendWebRequest();
+
+        if (request.result == UnityWebRequest.Result.Success)
+        {
+            Debug.Log("Init received");
+            var downloadHandlerText = request.downloadHandler.text;
+            InitOutputData output = JsonUtility.FromJson<InitOutputData>(downloadHandlerText);
+            Debug.Log("Init: " + output.ToString());
+            OnOpenedExitsReceived?.Invoke(output.openExits);
+            OnMonsterSpawnReceived?.Invoke(output.monsterSpawn);
+            OnChildSpawnReceived?.Invoke(output.childSpawn);
         }
     }
 

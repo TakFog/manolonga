@@ -23,7 +23,14 @@ public class WaitForInitializationState : State
 
     IEnumerator C_WaitForInitialization()
     {
-        yield return CommunicationManager.Instance.StartCoroutine(CommunicationManager.Instance.C_ClearServer());
+        var comMan = CommunicationManager.Instance;
+        yield return comMan.StartCoroutine(comMan.C_ClearServer());
+        var initInput = new InitInputData();
+        initInput.numExits = ExitManager.Instance.ActiveExits.Count;
+        initInput.numOpenExits = ExitManager.Instance.numberOfUsedExits;
+        initInput.numChildSpawns = 1;
+        initInput.numMonsterSpawns = 1;
+        yield return comMan.StartCoroutine(comMan.C_InitGame(initInput));
         StateManager.Instance.ChangeState(new WaitForActionChoiceState());
     }
 

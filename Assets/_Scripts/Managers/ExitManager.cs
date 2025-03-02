@@ -5,7 +5,7 @@ using UnityEngine;
 public class ExitManager : MonoBehaviour
 {
     public static ExitManager Instance { get; private set; }
-    [SerializeField] int numberOfUsedExits;
+    public int numberOfUsedExits;
     public List<Exit> ActiveExits = new List<Exit>(); 
     public List<Exit> ClosedExits = new List<Exit>();
     public List<Exit> OpenedExits => ActiveExits.Except(ClosedExits).ToList();
@@ -13,17 +13,39 @@ public class ExitManager : MonoBehaviour
     private void Awake()
     {
         Instance = this;
-        ActiveExits = new List<Exit>(FindObjectsOfType<Exit>());
-        int numberOfUnusedExits = ActiveExits.Count - numberOfUsedExits;
-        ShuffleList(ActiveExits);
-        
-        for(int i = 0; i < numberOfUnusedExits; i++)
+        ActiveExits = new List<Exit>(FindObjectsByType<Exit>(FindObjectsSortMode.None))
+            .OrderBy(e => e.transform.position.x).ThenBy(e => e.transform.position.y).ToList();
+        //ShuffleList(ActiveExits);
+
+        //for (int i = numberOfUsedExits; i < ActiveExits.Count; i++)
+        //{
+        //    ActiveExits[i].SetClosed();
+        //    ClosedExits.Add(ActiveExits[i]);
+        //}
+    }
+
+    private void OnEnable()
+    {
+        CommunicationManager.Instance.OnOpenedExitsReceived += InitExits;
+    }
+
+    private void OnDisable()
+    {
+        CommunicationManager.Instance.OnOpenedExitsReceived -= InitExits;
+    }
+
+    private void InitExits(int[] opened)
+    {
+        for (int i = 0; i < ActiveExits.Count; i++)
         {
-            ActiveExits[i].gameObject.SetActive(false);
-            ActiveExits.RemoveAt(i);
+            if (!opened.Contains(i))
+            {
+                ClosedExits.Add(ActiveExits[i]);
+                ActiveExits[i].SetClosed();
+            }
         }
     }
-    
+
     void ShuffleList(List<Exit> list)
     {
         for (int i = 0; i < list.Count - 1; i++)
